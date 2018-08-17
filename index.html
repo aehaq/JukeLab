@@ -5,18 +5,78 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <!-- UI Kit CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.10/css/uikit.min.css" />
+
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
   </head>
   <body>
-      
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+
+    <div id="header" class="uk-padding-small">
+      <div id="logo">
+        <img src="assets/images/logo.png" alt="">
+      </div>
+      <button id="createPlaylistBtn" class="purpleButton uk-align-center" type="button" uk-toggle="target: #modalCreatePlaylist"><i class="fas fa-plus"></i> Create A Playlist</button>
+
+      <!-- Modal for creating playlist -->
+      <div id="modalCreatePlaylist" uk-modal>
+          <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+              <button class="uk-modal-close-default" type="button" uk-close></button>
+              <h2 class="uk-modal-title">Create Playlist</h2>
+              <div class="greenSeperator uk-margin-small-bottom"></div>
+              <h2 class="uk-margin uk-margin-small-bottom">Playlist Name</h2>
+              <form>
+                <div class="uk-margin">
+                    <input class="uk-input" type="text" placeholder="Crystal's House Party">
+                </div>
+              </form>
+              <h2 class="uk-margin-small">Login</h2>
+              <button id="spotifyLoginBtn" type="button" name="button">Login With Spotify</button>
+          </div>
+      </div>
+    </div>
+
+    <div id="content" class="uk-padding-small">
+      <div class="pageTitle">
+        <h2 class="uk-margin-small-bottom">Join A Playlist</h2>
+        <div class="greenSeperator uk-margin-medium-bottom"></div>
+      </div>
+      <div class="uk-grid-match uk-child-width-1-2 uk-text-center" uk-grid>
+        <!-- Cards are for example, they will be dynamically generated later on. -->
+        <a href="#">
+          <div>
+              <div class="uk-card uk-card-default uk-card-body uk-padding-small">
+                <img class="roundPlaylistImg" src="temp-images/drake.jpg" alt="">
+                <p>Name Of Playlist</p>
+              </div>
+           </div>
+        </a>
+        <a href="#">
+          <div>
+            <div class="uk-card uk-card-default uk-card-body uk-padding-small">
+              <img class="roundPlaylistImg" src="temp-images/drake.jpg" alt="">
+              <p>Name Of Playlist</p>
+            </div>
+          </div>
+        </a>
+        <a href="#">
+          <div>
+              <div class="uk-card uk-card-default uk-card-body uk-padding-small">
+                <img class="roundPlaylistImg" src="temp-images/drake.jpg" alt="">
+                <p>Name Of Playlist</p>
+              </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- JQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- UI Kit JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.10/js/uikit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.10/js/uikit-icons.min.js"></script>
     <script src="assets/javascript/app.js"></script>
   </body>
 </html>

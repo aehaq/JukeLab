@@ -1,0 +1,78 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+
+h2 {
+  color: #B9B9B9;
+  font-weight: 100;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #000;
+}
+
+#header {
+  height: 180px;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#2eadc9+0,51ec7f+100 */
+  background: rgb(46,173,201); /* Old browsers */
+  background: -moz-linear-gradient(45deg,  rgba(46,173,201,1) 0%, rgba(81,236,127,1) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(45deg,  rgba(46,173,201,1) 0%,rgba(81,236,127,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(45deg,  rgba(46,173,201,1) 0%,rgba(81,236,127,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2eadc9', endColorstr='#51ec7f',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+#logo img {
+  max-width: 120px;
+}
+
+.purpleButton {
+  min-height: 40px;
+  border-radius: 100px;
+  color: #fff;
+  border: 0px solid #fff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
+  font-size: 1.1em;
+  padding: 14px;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#3023ae+0,c86dd7+100 */
+  background: rgb(48,35,174); /* Old browsers */
+  background: -moz-linear-gradient(-45deg,  rgba(48,35,174,1) 0%, rgba(200,109,215,1) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg,  rgba(48,35,174,1) 0%,rgba(200,109,215,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg,  rgba(48,35,174,1) 0%,rgba(200,109,215,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3023ae', endColorstr='#c86dd7',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.greenSeperator {
+  height: 5px;
+  width: 65%;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#2eadc9+0,51ec7f+100 */
+  background: rgb(46,173,201); /* Old browsers */
+  background: -moz-linear-gradient(45deg,  rgba(46,173,201,1) 0%, rgba(81,236,127,1) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(45deg,  rgba(46,173,201,1) 0%,rgba(81,236,127,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(45deg,  rgba(46,173,201,1) 0%,rgba(81,236,127,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2eadc9', endColorstr='#51ec7f',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  border-radius: 7px;
+}
+
+.roundPlaylistImg {
+  height: 100px;
+  width: 100px;
+  border-radius: 150px;
+}
+
+.uk-input {
+  border-radius: 100px;
+  border: 0px solid #fff;
+  box-shadow: inset 0px 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+#spotifyLoginBtn {
+  width: 100%;
+  min-height: 40px;
+  color: #fff;
+  font-size: 1.1em;
+  border: 0px solid #fff;
+  border-radius: 100px;
+  background-color: #1DD660;
+}
