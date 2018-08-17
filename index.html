@@ -10,7 +10,6 @@
     <!-- UI Kit CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.10/css/uikit.min.css" />
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/landingpage.css">
   </head>
   <body>
 
@@ -20,6 +19,7 @@
       </div>
       <button id="createPlaylistBtn" class="purpleButton uk-align-center" type="button" uk-toggle="target: #modalCreatePlaylist"><i class="fas fa-plus"></i> Create A Playlist</button>
 
+      <!-- Modal for creating playlist -->
       <div id="modalCreatePlaylist" uk-modal>
           <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
               <button class="uk-modal-close-default" type="button" uk-close></button>
@@ -36,30 +36,38 @@
           </div>
       </div>
     </div>
+
     <div id="content" class="uk-padding-small">
       <div class="pageTitle">
         <h2 class="uk-margin-small-bottom">Join A Playlist</h2>
         <div class="greenSeperator uk-margin-medium-bottom"></div>
       </div>
       <div class="uk-grid-match uk-child-width-1-2 uk-text-center" uk-grid>
-        <div>
+        <!-- Cards are for example, they will be dynamically generated later on. -->
+        <a href="#">
+          <div>
+              <div class="uk-card uk-card-default uk-card-body uk-padding-small">
+                <img class="roundPlaylistImg" src="temp-images/drake.jpg" alt="">
+                <p>Name Of Playlist</p>
+              </div>
+           </div>
+        </a>
+        <a href="#">
+          <div>
             <div class="uk-card uk-card-default uk-card-body uk-padding-small">
-              <img class="roundPlaylistImg" src="temp/drake.jpg" alt="">
+              <img class="roundPlaylistImg" src="temp-images/drake.jpg" alt="">
               <p>Name Of Playlist</p>
             </div>
-         </div>
-        <div>
-            <div class="uk-card uk-card-default uk-card-body uk-padding-small">
-              <img class="roundPlaylistImg" src="temp/drake.jpg" alt="">
-              <p>Name Of Playlist</p>
-            </div>
-         </div>
-        <div>
-            <div class="uk-card uk-card-default uk-card-body uk-padding-small">
-              <img class="roundPlaylistImg" src="temp/drake.jpg" alt="">
-              <p>Name Of Playlist</p>
-            </div>
-         </div>
+          </div>
+        </a>
+        <a href="#">
+          <div>
+              <div class="uk-card uk-card-default uk-card-body uk-padding-small">
+                <img class="roundPlaylistImg" src="temp-images/drake.jpg" alt="">
+                <p>Name Of Playlist</p>
+              </div>
+          </div>
+        </a>
       </div>
     </div>
 
