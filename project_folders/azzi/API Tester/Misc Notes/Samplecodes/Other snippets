@@ -1,0 +1,31 @@
+
+for getting recently played
+    GET https://api.spotify.com/v1/me/player/recently-played
+    see more info at link: https://developer.spotify.com/documentation/web-api/reference/player/get-recently-played/
+
+Genius API key
+anHZFbIDz4jPebxO5yPLPUJYriEQp6PF4I0-_kwTNn40ccgThkcddcD8-DD1PEu-
+
+Python Example of Genius call 
+
+def request_song_info(song_title, artist_name):
+    base_url = 'https://api.genius.com'
+    headers = {'Authorization': 'Bearer ' + 'INSERT YOUR TOKEN HERE'}
+    search_url = base_url + '/search'
+    data = {'q': song_title + ' ' + artist_name}
+    response = requests.get(search_url, data=data, headers=headers)
+
+    return response
+
+# Search for matches in the request response
+for hit in json['response']['hits']:
+        if artist_name.lower() in hit['result']['primary_artist']['name'].lower():
+            remote_song_info = hit
+            break
+
+# Extract lyrics from URL if the song was found
+if remote_song_info:
+    song_url = remote_song_info['result']['url']
+
+
+Note: Check Music Match API
