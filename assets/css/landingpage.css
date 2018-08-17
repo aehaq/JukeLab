@@ -1,0 +1,24 @@
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+#header {
+  height: 180px;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#2eadc9+0,51ec7f+100 */
+  background: rgb(46,173,201); /* Old browsers */
+  background: -moz-linear-gradient(45deg,  rgba(46,173,201,1) 0%, rgba(81,236,127,1) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(45deg,  rgba(46,173,201,1) 0%,rgba(81,236,127,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(45deg,  rgba(46,173,201,1) 0%,rgba(81,236,127,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2eadc9', endColorstr='#51ec7f',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+h2 {
+  color: #B9B9B9;
+  font-weight: 100;
+}
+
+.roundPlaylistImg {
+  height: 100px;
+  width: 100px;
+  border-radius: 150px;
+}
