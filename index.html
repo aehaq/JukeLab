@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     <!-- UI Kit CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.10/css/uikit.min.css" />
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
@@ -15,30 +16,50 @@
 
     <div id="header" class="uk-padding-small">
       <div id="logo">
-        <h1>JukeLab</h1>
+        <img src="assets/images/logo.png" alt="">
       </div>
-      <div id="createPlaylistBtn">
+      <button id="createPlaylistBtn" class="purpleButton uk-align-center" type="button" uk-toggle="target: #modalCreatePlaylist"><i class="fas fa-plus"></i> Create A Playlist</button>
 
+      <div id="modalCreatePlaylist" uk-modal>
+          <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+              <button class="uk-modal-close-default" type="button" uk-close></button>
+              <h2 class="uk-modal-title">Create Playlist</h2>
+              <div class="greenSeperator uk-margin-medium-bottom"></div>
+              <h2 class="uk-margin-small">Playlist Name</h2>
+              <form>
+                <div class="uk-margin">
+                    <input class="uk-input" type="text" placeholder="Crystal's House Party">
+                </div>
+              </form>
+              <h2 class="uk-margin-small">Login</h2>
+              <button id="spotifyLoginBtn" type="button" name="button">Login With Spotify</button>
+          </div>
       </div>
     </div>
-    <div id="content" class="uk-padding">
+    <div id="content" class="uk-padding-small">
       <div class="pageTitle">
-        <h2 class="">Join A Playlist</h2>
-        <div class="greenSeperator"></div>
+        <h2 class="uk-margin-small-bottom">Join A Playlist</h2>
+        <div class="greenSeperator uk-margin-medium-bottom"></div>
       </div>
       <div class="uk-grid-match uk-child-width-1-2 uk-text-center" uk-grid>
-          <div>
-              <div class="uk-card uk-card-default uk-card-body uk-padding-small">
-                <img class="roundPlaylistImg" src="temp/drake.jpg" alt="">
-                <p>Name Of Playlist</p>
-              </div>
-           </div>
-          <div>
-              <div class="uk-card uk-card-default uk-card-body uk-padding-small">IMG<br>Name Of Playlist</div>
-          </div>
-          <div>
-              <div class="uk-card uk-card-default uk-card-body uk-padding-small">IMG<br>Name Of Playlist</div>
-          </div>
+        <div>
+            <div class="uk-card uk-card-default uk-card-body uk-padding-small">
+              <img class="roundPlaylistImg" src="temp/drake.jpg" alt="">
+              <p>Name Of Playlist</p>
+            </div>
+         </div>
+        <div>
+            <div class="uk-card uk-card-default uk-card-body uk-padding-small">
+              <img class="roundPlaylistImg" src="temp/drake.jpg" alt="">
+              <p>Name Of Playlist</p>
+            </div>
+         </div>
+        <div>
+            <div class="uk-card uk-card-default uk-card-body uk-padding-small">
+              <img class="roundPlaylistImg" src="temp/drake.jpg" alt="">
+              <p>Name Of Playlist</p>
+            </div>
+         </div>
       </div>
     </div>
 
