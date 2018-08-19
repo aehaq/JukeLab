@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+  </head>
+  <body>
+    
+    <div class="container">
+        <button type="button" name="" id="toggleplay" class="btn btn-primary btn-lg btn-block">Play/pause</button>
+        <button type="button" name="" id="forward" class="btn btn-primary btn-lg btn-block">Next</button>
+        <button type="button" name="" id="back" class="btn btn-primary btn-lg btn-block">Previous</button>
+    </div>
+
+    <div class="form-group">
+      <label for="">Song</label>
+      <input type="text"
+        class="form-control" id="track">
+      <label for="">Artist</label>
+      <input type="text"
+        class="form-control" id="artist">
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/5.4.0/firebase.js"></script>
+    <script src="https://sdk.scdn.co/spotify-player.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="assets/javascript/player.js"></script>
+    <script src="assets/javascript/genius.js"></script>
+
+  </body>
+</html>
