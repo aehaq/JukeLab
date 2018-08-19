@@ -9,8 +9,6 @@ var config = {
 };
 firebase.initializeApp(config);
 var database = firebase.database();
-localStorage.test = "test";
-
 
 function authorizeSpotify() {
     var token = "";
@@ -33,9 +31,18 @@ $("#spotifyLoginBtn").on("click", function(){
   authorizeSpotify();
 })
 
+
 // Populate current playlists
-// database.ref().on("child_added", function(childSnapshot) {
+database.ref().on("child_added", function(roomObj) {
+  var name = roomObj.val().name;
 
-
-
-// })
+  var tempDiv2 = $("<div>").attr("class", "uk-card uk-card-default uk-card-body uk-padding-small");
+  tempDiv2.html('<img class="roundPlaylistImg" src="temp-images/drake.jpg" alt="">' + "<p>" + name + "</p>")
+  
+  var tempDiv = $("<a>").attr("href", "#");
+    tempDiv.html(
+      $("<div>").html(tempDiv2)
+    )
+  
+  $("#playlistGrid").append(tempDiv);
+})
