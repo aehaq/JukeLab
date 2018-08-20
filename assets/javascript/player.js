@@ -30,6 +30,7 @@ if (window.location.href.includes("access_token")) {
     token = parseURL(window.location.href);
     console.log("parsed token: " + token);
     roomName = roomName;
+    userID = getUserInfo();
     makePlaylist();
     var newPlaylist = {
         name: roomName,
@@ -44,10 +45,10 @@ if (window.location.href.includes("access_token")) {
         console.log("playlist info", snapshot.val());
         console.log("token:", snapshot.val().token);
         token = snapshot.val().token;
+        userID = getUserInfo();
 })
 }
 
-userID = getUserInfo();
 console.log(userID);
 // check localstorage for name
 console.log("get item: " + roomName);
