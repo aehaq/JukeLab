@@ -30,7 +30,8 @@ if (window.location.href.includes("access_token")) {
     token = parseURL(window.location.href);
     console.log("parsed token: " + token);
     roomName = roomName;
-    userID = getUserInfo();
+    userID = getUserID();
+    console.log(userID);
     makePlaylist();
     var newPlaylist = {
         name: roomName,
@@ -45,11 +46,10 @@ if (window.location.href.includes("access_token")) {
         console.log("playlist info", snapshot.val());
         console.log("token:", snapshot.val().token);
         token = snapshot.val().token;
-        userID = getUserInfo();
+        userID = getUserID();
 })
 }
 
-console.log(userID);
 // check localstorage for name
 console.log("get item: " + roomName);
 
@@ -109,9 +109,8 @@ function parseURL(str) {
 }
 
 // function to get user id (not used currently)
-function getUserInfo () {
+function getUserID () {
     queryURL = "https://api.spotify.com/v1/me";
-    user = "124009025";
 
     $.ajax({
         url: queryURL,
