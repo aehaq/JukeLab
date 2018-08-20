@@ -79,7 +79,7 @@ body {
   }
 
   
-  #avatar img {
+  .avatar img {
     width: 117px !important;
     height: 117px !important;
   }
