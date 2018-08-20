@@ -117,3 +117,4 @@ function getUserInfo () {
             return userID;
     }
 
+console.log("testing this page");
