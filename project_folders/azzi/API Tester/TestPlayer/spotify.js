@@ -1,5 +1,5 @@
 var thisDevice;
-var apiKey = 'BQBGUyINZVixfOCiioUBvD4z4Qdjq3LaYtzPbk3YMdyFbtsXr9ygEXrRCfQ1T8oSWO9-kaiQWyFs901EAR8UPqRcEB7ZFZiMgpiCh6hmON35x-rTWV3q203aCKAO3IGtt8Q_KVEtUdGOb7uflu1PoNr0QnUsaUP-0Nm59Tuiu-Pulo8bEEGcxruuhg';
+var apiKey = 'BQBDUJrkwUhyisamMWWboOjM9zxXQTTZu4CrI1P-iK2H8z-1OHVY_yCupCQzHXvnBPk-8hGmNxAwiOEOKpcn-6jOjwXimRl2UtWsyZOrRJPYpWnnLmRqHSyb7gsXQGMQlA6PTmHhqvj3QEbeTs1pmreGQ7OV-LqiNpt5GCrJ7leA20iePiF2TsFNI-wwKFlMUm9u8EBJ6Y9wfkK1F-yzuse97uAzuS9NiON_6kCjMToYwS4-5tT18DKHLmwarSH-fUwi3CkZWuqh';
 var userID;
 var myId = 'y0boqvzwlmvycue8917uz1ylg';
 var playlist;
@@ -16,6 +16,12 @@ function makePlaylist () {
             'Content-Type' : "application/json"
         },
         url: 'https://api.spotify.com/v1/users/'+ myId +'/playlists',
+        success: function(newPlaylist) {
+            console.log(newPlaylist);
+            var playlistID = newPlaylist.id;
+            console.log(playlistID)
+            return playlistID;
+        },
         error: function(errorObject) {
             console.log("Ajax Post failed")
             console.log(errorObject)
@@ -157,21 +163,9 @@ $('#search').on("click", function() {
 
 // spotify:user:y0boqvzwlmvycue8917uz1ylg:playlist:0AH0ZjJeUpU7taDXPxjJJN
 
-//Play a song on click.
+//Add song to playlist on click.
 $(document).on('click', '.option', function() {
     event.preventDefault();
-
-    var trackId = $(this).attr("song-id") 
-    var playURL = 'https://api.spotify.com/v1/me/player/play?device_id=' + thisDevice
-
-    $.ajax({
-        url: playURL,
-        headers: {
-            'Authorization' : 'Bearer ' + apiKey,
-        },
-        data: '{"uris": ["spotify:track:'+trackId+'"]}',
-        method: "PUT"
-    })
 
     $.ajax({
         url: 'https://api.spotify.com/v1/playlists/0AH0ZjJeUpU7taDXPxjJJN/tracks',
@@ -193,42 +187,33 @@ $(document).on('click', '.option', function() {
 
 //loading playlist
 
-// $.ajax({
-    //             $.ajax({
-    //     type: "POST",
-    //     data: {
-    //         "name": "jukeLab", 
-    //         "public": false
+    // 
+    // var playURL = 'https://api.spotify.com/v1/me/player/play?device_id=' + thisDevice
 
-    //     },
+    // $.ajax({
+    //     url: playURL,
     //     headers: {
     //         'Authorization' : 'Bearer ' + apiKey,
-    //         'Content-Type' : "application/json"
     //     },
-    //     url: 'https://api.spotify.com/v1/users/'+ myId +'/playlists',
-    //     success: function(newPlaylist) {
-    //         console.log(newPlaylist);
-    //     },
-    //     error: function() {
-    //         console.log("Ajax Post failed")
-    //     }
+    //     data: '{"uris": ["spotify:playlist:'+playlistId+'"]}',
+    //     method: "PUT"
     // })
 
 //Add song to playlist
-// $.ajax({
-//         type: "POST",
-//         data: {
-//             "uris": ["spotify:track:'+trackId+'"]         
-//         },
-//         headers: {
-//             'Authorization' : 'Bearer ' + apiKey,
-//             'Content-Type' : "application/json"
-//         },
-//         url: 'https://api.spotify.com/v1/users/'+ myId +'/playlists/tracks',
-//         success: function(newPlaylist) {
-//             console.log(newPlaylist);
-//         },
-//         error: function() {
-//             console.log("Ajax Post failed")
-//         }
-//     })
+$.ajax({
+        type: "POST",
+        data: {
+            "uris": ["spotify:track:'+trackId+'"]         
+        },
+        headers: {
+            'Authorization' : 'Bearer ' + apiKey,
+            'Content-Type' : "application/json"
+        },
+        url: 'https://api.spotify.com/v1/users/'+ myId +'/playlists/tracks',
+        success: function(newPlaylist) {
+            console.log(newPlaylist);
+        },
+        error: function() {
+            console.log("Ajax Post failed")
+        }
+    })

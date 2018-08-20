@@ -15,6 +15,7 @@ var isHost = false;
 var token;
 var roomName = localStorage.playlistName;
 var deviceId;
+var playlistID;
 
 console.log(roomName);
 
@@ -199,10 +200,12 @@ function makePlaylist () {
             'Authorization' : 'Bearer ' + token,
             'Content-Type' : "application/json"
         },
-        url: 'https://api.spotify.com/v1/users/'+ myId +'/playlists',
+        url: 'https://api.spotify.com/v1/users/'+ userID +'/playlists',
         success: function(newPlaylist) {
             console.log(newPlaylist);
-            var playlistID = newPlaylist.id
+            var playlistID = newPlaylist.id;
+            console.log(playlistID)
+            return playlistID;
         },
         error: function(errorObject) {
             console.log("Ajax Post failed")
@@ -210,4 +213,5 @@ function makePlaylist () {
         }
     })
 }
+
 
