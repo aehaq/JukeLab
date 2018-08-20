@@ -137,7 +137,8 @@ body {
 
   .purpleRoundBtn {
     min-height: 75px;
-    min-width: 75px;;
+    min-width: 75px;
+    margin-top: 65px;
     border-radius: 100px;
     color: #fff;
     border: 0px solid #fff;
@@ -153,6 +154,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 100;
   }
 
 
