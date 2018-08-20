@@ -30,8 +30,10 @@
             </div>
 
         <!-- pause button -->    
-            <button id="pauseSongBtn" class="purpleRoundBtn uk-align-left-bottom" type="button" ><i class="fas fa-pause fa-3x"></i></button>    
+            <button id="pauseSongBtn" class="purpleRoundBtn uk-align-left-bottom uk-button"><i class="fas fa-pause fa-3x"></i></button>    
         
+        <!-- playlist name -->     
+            <h1 id="playlistName" class="uk-modal-title uk-position-top-right uk-margin-remove-adjacent uk-margin-right">Crystal's House Party</h1>
 
         </div>
 
@@ -44,7 +46,23 @@
 
             <!-- temp song list -->  
 
-            <div class="uk-container">
+            <div class="uk-container uk-margin">
+                <div class="uk-card-hover uk-card uk-card-small uk-card-default uk-grid-collapse uk-margin uk-animation-toggle" uk-grid>
+                    <div class="uk-card-body uk-width-5-6@s uk-animation-slide-top-small">
+                        <!-- class for song-title and artist-name -->  
+                        <h3 class="song-title uk-card-title">This is Song Name This is Song Name This is Song Name</h3>
+                        <p class="artist-name">by Drake</p>
+                    </div>
+
+                    <div id="avatar" class="uk-card-media-right uk-flex-last uk-cover-container uk-width-1-6@s uk-animation-slide-top-small">
+                        <canvas width="117" height="117"></canvas>
+                        <!-- class for artist-icon -->  
+                        <img class="artist-icon" src="assets/images/childish.jpg" alt="Image" uk-cover>
+                    </div>
+                </div>
+            </div>
+
+            <div class="uk-container-small uk-margin">
                 <div class="uk-card-hover uk-card uk-card-small uk-card-default uk-grid-collapse uk-margin uk-animation-toggle" uk-grid>
                     <div class="uk-card-body uk-width-5-6@s uk-animation-slide-top-small">
                         <!-- class for song-title and artist-name -->  

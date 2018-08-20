@@ -29,10 +29,17 @@
                 <img src="assets/images/logo.png" alt="">
             </div>
             
-            <!--Add song button with id="addSongBtn"-->
-            <button id="addSongBtn" class="purpleRoundBtn uk-align-left-bottom" type="button" uk-toggle="target: #addSong"><i class="fas fa-plus fa-3x"></i></button>
-            <h1 class="uk-modal-title uk-position-top-center uk-margin">Crystal's House Party</h1>
-        
+
+            <div class="uk-margin-top" uk-margin>
+                <!--Add song button with id="addSongBtn"-->
+                <button id="addSongBtn" class="purpleRoundBtn uk-button" type="button" uk-toggle="target: #addSong"><i class="fas fa-plus fa-3x"></i></button>
+                <!-- Veto Button : id-"vetoBtn" -->
+                <button id="vetoBtn" class="purpleRoundBtn uk-button uk-margin-left"><i class="fas fa-ban"></i> Veto</button>
+            </div>
+            
+             <!-- playlist name -->   
+            <h1 id="playlistName" class="uk-modal-title uk-position-top-right uk-margin-remove-adjacent uk-margin-right">Crystal's House Party</h1>
+            
             <!-- Modal for add songs -->
             <div id="addSong" uk-modal>
                 <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
@@ -49,28 +56,28 @@
 
 
                         <div class="uk-card-hover uk-card uk-card-small uk-card-default uk-grid-collapse uk-margin-small uk-animation-toggle" uk-grid>
-                            <div class="uk-card-body uk-width-5-6@s uk-animation-slide-top-small">
+                            <div class="uk-card-body uk-width-3-4@s uk-animation-slide-top-small">
                                 <!-- class for song-title and artist-name -->  
                                 <h4 class="song-title uk-card-title">This is Song Name</h4>
                                 <p class="artist-name">by Drake</p>
                             </div>
         
-                            <div id="avatar" class="uk-card-media-right uk-flex-last uk-cover-container uk-width-1-6@s uk-animation-slide-top-small">
-                                <canvas width="100" height="100"></canvas>
+                            <div id="avatar" class="uk-card-media-right uk-flex-last uk-cover-container uk-width-1-4@s uk-animation-slide-top-small">
+                                <canvas width="117" height="117"></canvas>
                                 <!-- class for artist-icon -->  
                                 <img class="artist-icon" src="assets/images/childish.jpg" alt="Image" uk-cover>
                             </div>
                         </div>
 
                         <div class="uk-card-hover uk-card uk-card-small uk-card-default uk-grid-collapse uk-margin-small uk-animation-toggle" uk-grid>
-                            <div class="uk-card-body uk-width-5-6@s uk-animation-slide-top-small">
+                            <div class="uk-card-body uk-width-3-4@s uk-animation-slide-top-small">
                                 <!-- class for song-title and artist-name -->  
                                 <h4 class="song-title uk-card-title">This is Song Name</h4>
                                 <p class="artist-name">by Drake</p>
                             </div>
         
-                            <div id="avatar" class="uk-card-media-right uk-flex-last uk-cover-container uk-width-1-6@s uk-animation-slide-top-small">
-                                <canvas width="100" height="100"></canvas>
+                            <div id="avatar" class="uk-card-media-right uk-flex-last uk-cover-container uk-width-1-4@s uk-animation-slide-top-small">
+                                <canvas width="117" height="117"></canvas>
                                 <!-- class for artist-icon -->  
                                 <img class="artist-icon" src="assets/images/childish.jpg" alt="Image" uk-cover>
                             </div>
@@ -89,33 +96,39 @@
 
         <div class="uk-section uk-background-cover" style="background-image: url(assets/images/playlist_background.jpg)">
        
-
-            <div class="container">
-                            
-                 <!-- Veto Button : id-"vetoBtn" -->
-                <button id="vetoBtn" class="actionBtn uk-align-center" type="button"><i class="fas fa-ban"></i> Veto</button>
-                
-
-                 <!-- To open Lyrics -->
-                <ul uk-accordion> 
-                    <li class="uk-open">
-                        <!-- id="lyricsBtn" for lyrics button -->
-                        <button id="lyricsBtn" class="uk-accordion-title purpleButton uk-align-center"><i class="fas fas fa-stream"></i> Lyrics</button>
-                        
-                        <div class="uk-accordion-content uk-card uk-card-default uk-card-large">
-                            <h4 class="uk-padding">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h4>
-                        </div>
+            <!-- To open Lyrics -->
+            <ul uk-accordion> 
+                <li class="uk-open">
+                    <!-- id="lyricsBtn" for lyrics button -->
+                    <button id="lyricsBtn" class="uk-accordion-title purpleButton uk-align-center"><i class="fas fas fa-stream"></i> Lyrics</button>
                     
-                    </li>
-                </ul>
-            
-               
-            </div>
-            
+                    <div class="uk-accordion-content uk-card uk-card-default uk-card-large">
+                        <!-- id="lyricsDisplay"-->
+                        <h4 id="lyricsDisplay" class="uk-padding">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h4>
+                    </div>
+                
+                </li>
+            </ul>    
 
             <!-- temp song list -->  
 
-            <div class="uk-container">
+            <div class="uk-container uk-margin">
+                <div class="uk-card-hover uk-card uk-card-small uk-card-default uk-grid-collapse uk-margin uk-animation-toggle" uk-grid>
+                    <div class="uk-card-body uk-width-5-6@s uk-animation-slide-top-small">
+                        <!-- class for song-title and artist-name -->  
+                        <h3 class="song-title uk-card-title">This is Song Name This is Song Name This is Song Name</h3>
+                        <p class="artist-name">by Drake</p>
+                    </div>
+
+                    <div id="avatar" class="uk-card-media-right uk-flex-last uk-cover-container uk-width-1-6@s uk-animation-slide-top-small">
+                        <canvas width="117" height="117"></canvas>
+                        <!-- class for artist-icon -->  
+                        <img class="artist-icon" src="assets/images/childish.jpg" alt="Image" uk-cover>
+                    </div>
+                </div>
+            </div>
+
+            <div class="uk-container-small uk-margin">
                 <div class="uk-card-hover uk-card uk-card-small uk-card-default uk-grid-collapse uk-margin uk-animation-toggle" uk-grid>
                     <div class="uk-card-body uk-width-5-6@s uk-animation-slide-top-small">
                         <!-- class for song-title and artist-name -->  
@@ -193,8 +206,6 @@
                         <img class="artist-icon" src="assets/images/drake.jpg" alt="Image" uk-cover>
                     </div>
                 </div>
-
-                 
 
             </div>     
             
