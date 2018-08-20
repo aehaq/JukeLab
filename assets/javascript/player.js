@@ -14,6 +14,8 @@ var database = firebase.database();
 var isHost = false;
 var token;
 var roomName = localStorage.playlistName;
+
+var userID;
 var deviceId;
 var playlistID;
 
@@ -31,10 +33,9 @@ if (window.location.href.includes("access_token")) {
     makePlaylist();
     var newPlaylist = {
         name: roomName,
-        token: token
+        token: token, 
     }
     database.ref().child(roomName).set(newPlaylist);
-
     // database.ref().push(newPlaylist);
     console.log(newPlaylist);
 } else {
@@ -45,6 +46,9 @@ if (window.location.href.includes("access_token")) {
         token = snapshot.val().token;
 })
 }
+
+userID = getUserInfo();
+console.log(userID);
 // check localstorage for name
 console.log("get item: " + roomName);
 

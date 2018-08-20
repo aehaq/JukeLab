@@ -11,8 +11,6 @@ firebase.initializeApp(config);
 var database = firebase.database();
 
 function authorizeSpotify() {
-    var token = "";
-    var userID = "";
     var clientID = "b93cd2a896b04db6968176145cd8537f";
     var redirectURI = "https://aehaq.github.io/JukeLab/playlist_host.html";
     var scopeParameter = "&scope=playlist-read-collaborative playlist-modify-public playlist-read-private playlist-modify-private user-read-currently-playing user-modify-playback-state user-read-playback-state app-remote-control streaming user-read-recently-played user-read-birthdate user-read-email user-read-private";
