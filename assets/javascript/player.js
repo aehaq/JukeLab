@@ -1,13 +1,3 @@
-//andrew
-var isHost = false;
-var token = "";
-var roomName;
-
-// if URL has token, user is host
-if (window.location.href.includes("access_token")) {
-    var isHost = true;
-}
-
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyC1CNzGvk1-txN23py3SyoVRrLmWbpbdvY",
@@ -20,26 +10,43 @@ var config = {
 firebase.initializeApp(config);
 var database = firebase.database();
 
-// check localstorage for name
-console.log("get item: " + localStorage.playlistName);
+// Declare variables
+var isHost = false;
+var token;
+var roomName = localStorage.playlistName;
+console.log(roomName);
 
+// Change room name
+$("#titleText").text(roomName);
+
+// if user is host, make new playlist and add key to database
+if (window.location.href.includes("access_token")) {
+    var isHost = true;
+    token = parseURL(window.location.href);
+    console.log("parsed token: " + token);
+    roomName = roomName;
+    var newPlaylist = {
+        name: roomName,
+        token: token
+    }
+    database.ref().child(roomName).set(newPlaylist);
+
+    // database.ref().push(newPlaylist);
+    console.log(newPlaylist);
+} else {
+    // if guest, search firebase, get authentication token
+    database.ref().child(roomName).once('value').then(function(snapshot) {
+        console.log("playlist info", snapshot.val());
+        console.log("token:", snapshot.val().token);
+        token = snapshot.val().token;
+})
+}
+// check localstorage for name
+console.log("get item: " + roomName);
+
+///////////////////////////////////////////////////
 // Initialize Spotify SDK and parse token from url
 window.onSpotifyWebPlaybackSDKReady = () => {
-    if (isHost) {
-        token = parseURL(window.location.href);
-        console.log("parsed token: " + token);
-        roomName = localStorage.playlistName;
-        var newPlaylist = {
-            name: roomName,
-            token: token
-        }
-        database.ref().push(newPlaylist);
-        console.log(newPlaylist);
-    }
-    // } else {
-    //     roomName = 
-    //     token = 
-    // }
     const player = new Spotify.Player({
     name: 'Test Player',
     getOAuthToken: cb => { cb(token); }
@@ -79,6 +86,7 @@ $('#back').on("click", function() {
     player.nextTrack();
 });
 };
+//////////////////////////////////////////////////////////////
 
 //parse url, returns token
 function parseURL(str) {
@@ -102,9 +110,10 @@ function getUserInfo () {
             method: "GET"
             }).then(function(response) {
             console.log("response");
-            userID = response.id;  //get user ID
+            var userID = response.id;  //get user ID
             console.log(response);
             console.log(userID);
             })
             return userID;
     }
+
