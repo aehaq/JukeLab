@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Playlist</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+        
+        <!-- UIkit CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.10/css/uikit.min.css" />
+        <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        
+        <!-- UIkit JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.10/js/uikit.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.10/js/uikit-icons.min.js"></script>
+
+        <script src="https://www.gstatic.com/firebasejs/5.3.1/firebase.js"></script>
+        <script src="assets/javascript/app.js"></script>
+
+    </head>
+
+    <body>
+
+        <div id="header" class="uk-padding-small">
+            <div id="logo">
+                <img src="assets/images/logo.png" alt="">
+            </div>
+
+        <!-- pause button -->    
+            <button id="pauseSongBtn" class="purpleRoundBtn uk-align-left-bottom" type="button" ><i class="fas fa-pause fa-3x"></i></button>    
+        
+
+        </div>
+
+
+        <!-- temp background image -->  
+
+        <div class="uk-section uk-background-cover" style="background-image: url(assets/images/playlist_background.jpg)">
+       
+            
+
+            <!-- temp song list -->  
+
+            <div class="uk-container">
+                <div class="uk-card-hover uk-card uk-card-small uk-card-default uk-grid-collapse uk-margin uk-animation-toggle" uk-grid>
+                    <div class="uk-card-body uk-width-5-6@s uk-animation-slide-top-small">
+                        <!-- class for song-title and artist-name -->  
+                        <h3 class="song-title uk-card-title">This is Song Name This is Song Name This is Song Name</h3>
+                        <p class="artist-name">by Drake</p>
+                    </div>
+
+                    <div id="avatar" class="uk-card-media-right uk-flex-last uk-cover-container uk-width-1-6@s uk-animation-slide-top-small">
+                        <canvas width="117" height="117"></canvas>
+                        <!-- class for artist-icon -->  
+                        <img class="artist-icon" src="assets/images/childish.jpg" alt="Image" uk-cover>
+                    </div>
+                </div>
+
+
+                <div class="uk-card uk-card-small uk-card-default uk-grid-collapse uk-margin uk-animation-toggle" uk-grid>
+                    <div class="uk-card-body uk-width-5-6@s uk-animation-slide-top-small">
+                        <h3 class="song-title uk-card-title">This is Song Name This is Song Name This is Song Name</h3>
+                        <p class="artist-name">by Drake</p>
+                    </div>
+
+                    <div id="avatar" class="uk-card-media-right uk-flex-last uk-cover-container uk-width-1-6@s uk-animation-slide-top-small">
+                        <canvas width="117" height="117"></canvas>
+                        <img class="artist-icon" src="assets/images/drake.jpg" alt="Image" uk-cover>
+                    </div>
+                </div>
+
+ 
+                <div class="uk-card-hover uk-card uk-card-small uk-card-default uk-grid-collapse uk-margin uk-animation-toggle" uk-grid>
+                    <div class="uk-card-body uk-width-5-6@s uk-animation-slide-top-small">
+                        <h3 class="song-title uk-card-title">This is Song Name This is Song Name This is Song Name</h3>
+                        <p class="artist-name">by Drake</p>
+                    </div>
+
+                    <div id="avatar" class="uk-card-media-right uk-flex-last uk-cover-container uk-width-1-6@s uk-animation-slide-top-small">
+                        <canvas width="117" height="117"></canvas>
+                        <img class="artist-icon" src="assets/images/childish.jpg" alt="Image" uk-cover>
+                    </div>
+                </div>
+
+
+                <div class="uk-card uk-card-small uk-card-default uk-grid-collapse uk-margin uk-animation-toggle" uk-grid>
+                    <div class="uk-card-body uk-width-5-6@s uk-animation-slide-top-small">
+                        <h3 class="song-title uk-card-title">This is Song Name This is Song Name This is Song Name</h3>
+                        <p class="artist-name">by Drake</p>
+                    </div>
+
+                    <div id="avatar" class="uk-card-media-right uk-flex-last uk-cover-container uk-width-1-6@s uk-animation-slide-top-small">
+                        <canvas width="117" height="117"></canvas>
+                        <img class="artist-icon" src="assets/images/drake.jpg" alt="Image" uk-cover>
+                    </div>
+                </div>
+
+                <div class="uk-card-hover uk-card uk-card-small uk-card-default uk-grid-collapse uk-margin uk-animation-toggle" uk-grid>
+                    <div class="uk-card-body uk-width-5-6@s uk-animation-slide-top-small">
+                        <h3 class="song-title uk-card-title">This is Song Name This is Song Name This is Song Name</h3>
+                        <p class="artist-name">by Drake</p>
+                    </div>
+
+                    <div id="avatar" class="uk-card-media-right uk-flex-last uk-cover-container uk-width-1-6@s uk-animation-slide-top-small">
+                        <canvas width="117" height="117"></canvas>
+                        <img class="artist-icon" src="assets/images/childish.jpg" alt="Image" uk-cover>
+                    </div>
+                </div>
+
+
+                <div class="uk-card uk-card-small uk-card-default uk-grid-collapse uk-margin uk-animation-toggle" uk-grid>
+                    <div class="uk-card-body uk-width-5-6@s uk-animation-slide-top-small">
+                        <h3 class="song-title uk-card-title">This is Song Name This is Song Name This is Song Name</h3>
+                        <p class="artist-name">by Drake</p>
+                    </div>
+
+                    <div id="avatar" class="uk-card-media-right uk-flex-last uk-cover-container uk-width-1-6@s uk-animation-slide-top-small">
+                        <canvas width="117" height="117"></canvas>
+                        <img class="artist-icon" src="assets/images/drake.jpg" alt="Image" uk-cover>
+                    </div>
+                </div>
+
+                 
+
+            </div>
+
+
+
+
+        
+        
+        </div>
+
+
+
+
+
+
+
+
+
+
+    </body>
+</html>
