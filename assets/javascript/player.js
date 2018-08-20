@@ -17,7 +17,7 @@ var roomName = localStorage.playlistName;
 console.log(roomName);
 
 // Change room name
-$("#titleText").text(roomName);
+$("#playlistName").text(roomName);
 
 // if user is host, make new playlist and add key to database
 if (window.location.href.includes("access_token")) {
