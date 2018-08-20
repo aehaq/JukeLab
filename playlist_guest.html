@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.10/css/uikit.min.css" />
         <link rel="stylesheet" type="text/css" href="assets/css/style.css"/>
 
+
         <!-- UIkit JS -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.10/js/uikit.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.10/js/uikit-icons.min.js"></script>
@@ -20,12 +21,12 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="assets/javascript/player.js"></script>
 
-
+        
 
     </head>
-
+    
     <body>
-
+        
         <div id="header" class="uk-padding-small">
             <div id="logo">
                 <img src="assets/images/logo.png" alt="">
@@ -44,14 +45,14 @@
             <!-- Modal for add songs -->
             <div id="addSong" uk-modal>
                 <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
-                        <button class="uk-modal-close-default" type="button" uk-close></button>
-                        <h2 class="uk-modal-title">Add To Que</h2>
-                        <div class="greenSeperator uk-margin-small-bottom"></div>
+                    <button class="uk-modal-close-default" type="button" uk-close></button>
+                    <h2 class="uk-modal-title">Add To Que</h2>
+                    <div class="greenSeperator uk-margin-small-bottom"></div>
                         <h2 class="uk-margin uk-margin-small-bottom">Search</h2>
                         <div class="uk-margin-small">
-                            <form class="uk-search uk-search-default uk-search-navbar">
-                                <button href="" class="uk-search-icon-flip" uk-search-icon></button>
-                                <input class="uk-search-input" type="search" placeholder="Search...">
+                            <form>
+                                <input type="text" id="search-input" />
+                                <button id="search" type="submit">Submit</button>
                             </form>
                         </div>
 
@@ -73,12 +74,16 @@
                                   <p class="artist-name uk-margin-remove">by Toto</p>
                                 </div>
                                 <img class="artist-icon" src="assets/images/childish.jpg" alt="Image">
+
                             </div>
-                        </div>
+                        </div> -->
+                        
+                    </div>
 
                 </div>
-
+                
             </div>
+
 
         </div>
 
@@ -92,6 +97,7 @@
             <!-- To open Lyrics -->
             <ul uk-accordion>
                 <li class="">
+
                     <!-- id="lyricsBtn" for lyrics button -->
                     <button id="lyricsBtn" class="uk-accordion-title purpleButton uk-align-center"><i class="fas fas fa-stream"></i> Lyrics</button>
 
@@ -140,6 +146,14 @@
 
 
 
+        <!-- UIkit JS -->
+        <script src="https://www.gstatic.com/firebasejs/5.4.0/firebase.js"></script>
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.10/js/uikit.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.10/js/uikit-icons.min.js"></script>
+
+        <script src="https://sdk.scdn.co/spotify-player.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="assets/javascript/player.js"></script>
     </body>
 </html>
