@@ -7,9 +7,6 @@ var playlist;
 // This function should create a spotify playlist (Currently returns error)
 function makePlaylist () {
     $.post({
-        success: function(newPlaylist) {
-            console.log(newPlaylist);
-        },
         data: '{"name": "jukeLab", "public": false}',
         headers: {
             'Authorization' : 'Bearer ' + apiKey,
