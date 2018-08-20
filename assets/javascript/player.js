@@ -14,7 +14,10 @@ var database = firebase.database();
 var isHost = false;
 var token;
 var roomName = localStorage.playlistName;
+
 var userID;
+var deviceId;
+
 console.log(roomName);
 
 // Change room name
@@ -26,6 +29,7 @@ if (window.location.href.includes("access_token")) {
     token = parseURL(window.location.href);
     console.log("parsed token: " + token);
     roomName = roomName;
+    makePlaylist();
     var newPlaylist = {
         name: roomName,
         token: token, 
@@ -67,6 +71,8 @@ player.addListener('player_state_changed', state => { console.log(state); });
 // Ready
 player.addListener('ready', ({ device_id }) => {
 console.log('Ready with Device ID', device_id);
+deviceId = device_id
+return deviceId;
 });
 
 // Not Ready
@@ -110,13 +116,102 @@ function getUserInfo () {
         headers: {
             'Authorization' : 'Bearer ' + token,
         },
-            method: "GET"
-            }).then(function(response) {
-            console.log("response");
-            var userID = response.id;  //get user ID
-            console.log(response);
-            console.log(userID);
-            })
-            return userID;
-    }
+        method: "GET"
+        }).then(function(response) {
+        console.log("response");
+        var userID = response.id;  //get user ID
+        console.log(response);
+        console.log(userID);
+    })
+    return userID;
+}
+
+//////////////////////////////////////////////////////////////
+
+$(function(){
+    console.log("test js page");
+
+})
+
+
+
+// When the search button is clicked.
+$('#search').on("click", function() {
+    event.preventDefault();
+
+    console.log('Search function clicked');
+
+    $('#search-results').empty();
+
+    // Pulls search info    
+    var searchQuery = $("#search-input").val();
+    
+    //Query URL for searching songs, note: Only takes one query, type needs to be selected    
+    var searchUrl = "https://api.spotify.com/v1/search?q=" + searchQuery + "&type=track"
+    
+    $.ajax({
+        url: searchUrl,
+        headers: {
+            'Authorization' : 'Bearer ' + token,
+        },
+        method: "GET"
+    }).then(function(response) {
+        console.log(response);
+        var results = response.tracks.items;
+
+        for (let i = 0; i < 5; i++) {
+            var song = results[i];
+            var artist = song.artists[0].name;
+            var title = song.name;
+            var id = song.id;
+            var imgLarge = song.album.images[0].url;
+            var imgMed = song.album.images[1].url;
+
+            var resultCard = $('<div class="uk-card-hover uk-card uk-card-small uk-card-default uk-grid-collapse uk-margin-small uk-animation-toggle" uk-grid>'); 
+
+            var imageCard = $('<div class="avatar uk-card-media-right uk-flex-last uk-cover-container uk-width-1-4@s uk-animation-slide-top-small">');
+
+            var infoCard = $('<div class="uk-card-body uk-width-3-4@s uk-animation-slide-top-small">');
+            
+            infoCard.append('<h4 class="song-title uk-card-title">'+ title +'</h4><p class="artist-name">by '+artist+'</p>');
+            
+            imageCard.append('<canvas width="117" height="117"></canvas><img class="artist-icon" src="'+imgMed+'" alt="Image" uk-cover>');
+            
+            resultCard.append(infoCard);
+            resultCard.append(imageCard);
+            
+            resultCard.addClass("option");
+            resultCard.attr("title", title);
+            resultCard.attr("artist", artist);
+            resultCard.attr("song-id", id);
+            resultCard.attr("lrg-img", imgLarge);
+            resultCard.attr("med-img", imgMed);
+            
+            $('#search-results').append(resultCard);
+        }
+
+    })
+
+})
+
+//////////////////////
+
+function makePlaylist () {
+    $.post({
+        data: '{"name": "jukeLab", "public": false}',
+        headers: {
+            'Authorization' : 'Bearer ' + token,
+            'Content-Type' : "application/json"
+        },
+        url: 'https://api.spotify.com/v1/users/'+ myId +'/playlists',
+        success: function(newPlaylist) {
+            console.log(newPlaylist);
+            var playlistID = newPlaylist.id
+        },
+        error: function(errorObject) {
+            console.log("Ajax Post failed")
+            console.log(errorObject)
+        }
+    })
+}
 
