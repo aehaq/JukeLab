@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Playlist</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+        
+        <!-- UIkit CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.10/css/uikit.min.css" />
+        <link rel="stylesheet" type="text/css" href="assets/css/style.css"/>
+        
+        <!-- UIkit JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.10/js/uikit.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.10/js/uikit-icons.min.js"></script>
+
+        <script src="https://www.gstatic.com/firebasejs/5.4.0/firebase.js"></script>
+        <script src="https://sdk.scdn.co/spotify-player.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="assets/javascript/player.js"></script>
+
+
+
+    </head>
+
+    <body>
+        <div class="uk-margin-top" uk-margin>
+            <!--Add song button with id="addSongBtn"-->
+            <button id="addSongBtn" class="purpleRoundBtn uk-button" type="button" uk-toggle="target: #addSong"><i class="fas fa-plus fa-3x"></i></button>
+            <!-- Veto Button : id-"vetoBtn" -->
+            <button id="vetoBtn" class="purpleRoundBtn uk-button uk-margin-left"><i class="fas fa-ban"></i> Veto</button>
+        </div>
+        
+         <!-- playlist name -->   
+        <h1 id="playlistName" class="uk-modal-title uk-position-top-right uk-margin-remove-adjacent uk-margin-right">Crystal's House Party</h1>
+        
+        <!-- Modal for add songs -->
+        <div id="addSong" uk-modal>
+            <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+                    <button class="uk-modal-close-default" type="button" uk-close></button>
+                    <h2 class="uk-modal-title">Add To Que</h2>
+                    <div class="greenSeperator uk-margin-small-bottom"></div>
+                    <h2 class="uk-margin uk-margin-small-bottom">Search</h2>
+                    <div class="uk-margin-small">
+                        <form class="uk-search uk-search-default uk-search-navbar">
+                            <button href="" class="uk-search-icon-flip" uk-search-icon></button>
+                            <input class="uk-search-input" type="search" placeholder="Search...">
+                        </form>
+                    </div>
+
+
+                    <div class="uk-card-hover uk-card uk-card-small uk-card-default uk-grid-collapse uk-margin-small uk-animation-toggle" uk-grid>
+                        <div class="uk-card-body uk-width-3-4@s uk-animation-slide-top-small">
+                            <!-- class for song-title and artist-name -->  
+                            <h4 class="song-title uk-card-title">This is Song Name</h4>
+                            <p class="artist-name">by Drake</p>
+                        </div>
+    
+                        <div id="avatar" class="uk-card-media-right uk-flex-last uk-cover-container uk-width-1-4@s uk-animation-slide-top-small">
+                            <canvas width="117" height="117"></canvas>
+                            <!-- class for artist-icon -->  
+                            <img class="artist-icon" src="assets/images/childish.jpg" alt="Image" uk-cover>
+                        </div>
+                    </div>
+
+                    <div class="uk-card-hover uk-card uk-card-small uk-card-default uk-grid-collapse uk-margin-small uk-animation-toggle" uk-grid>
+                        <div class="uk-card-body uk-width-3-4@s uk-animation-slide-top-small">
+                            <!-- class for song-title and artist-name -->  
+                            <h4 class="song-title uk-card-title">This is Song Name</h4>
+                            <p class="artist-name">by Drake</p>
+                        </div>
+    
+                        <div id="avatar" class="uk-card-media-right uk-flex-last uk-cover-container uk-width-1-4@s uk-animation-slide-top-small">
+                            <canvas width="117" height="117"></canvas>
+                            <!-- class for artist-icon -->  
+                            <img class="artist-icon" src="assets/images/childish.jpg" alt="Image" uk-cover>
+                        </div>
+                    </div>
+
+            </div>
+
+        </div>
+  
+
+            <!-- temp song list -->  
+        <div id="playlistQueue">
+    
+
+     
+
+ 
+             
+
+
+               
+
+                
+
+
+              
+
+            
+            
+        </div>
+      
+
+
+        <button id="test-button">test</button>
+
+
+
+
+        <script src="https://www.gstatic.com/firebasejs/5.4.0/firebase.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="app.js"></script>
+
+
+    </body>
+</html>
