@@ -36,6 +36,10 @@ body {
     max-width: 120px;
   }
 
+  #playlistName {
+    width: 100%;
+  }
+
   .purpleButton {
     min-height: 40px;
     border-radius: 100px;
