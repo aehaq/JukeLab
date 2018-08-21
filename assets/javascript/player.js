@@ -32,11 +32,9 @@ if (window.location.href.includes("access_token")) {
     token = parseURL(window.location.href);
     console.log("parsed token: " + token);
     roomName = roomName;
-  
     userID = getUserID();
     console.log(userID);
     makePlaylist();
-
     var newPlaylist = {
         name: roomName,
         token: token, 
@@ -127,9 +125,6 @@ function getUserID () {
         var userID = response.id;  //get user ID
         console.log(response);
         console.log(userID);
-        if (isHost) {
-            makePlaylist(userID);
-        }
     })
     return userID;
 }
@@ -252,9 +247,9 @@ $('#search').on("click", function() {
 
 //////////////////////
 
-function makePlaylist (userID) {
+function makePlaylist () {
     $.post({
-        data: '{"name": "'+roomName+'", "public": false}',
+        data: '{"name": "jukeLab", "public": false}',
         headers: {
             'Authorization' : 'Bearer ' + token,
             'Content-Type' : "application/json"
@@ -262,8 +257,9 @@ function makePlaylist (userID) {
         url: 'https://api.spotify.com/v1/users/'+ userID +'/playlists',
         success: function(newPlaylist) {
             console.log(newPlaylist);
-            playlistID = newPlaylist.id;
+            var playlistID = newPlaylist.id;
             console.log(playlistID)
+            return playlistID;
         },
         error: function(errorObject) {
             console.log("Ajax Post failed")
@@ -273,4 +269,3 @@ function makePlaylist (userID) {
 }
 
 
-console.log("testing this page");
