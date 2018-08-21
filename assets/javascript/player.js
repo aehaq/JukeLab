@@ -333,7 +333,6 @@ $(document).on('click', '.option', function() {
 function playCurrent() {
 
     if (isHost) {
-
         var loadURL = 'https://api.spotify.com/v1/me/player/play?device_id=' + deviceId
         $.ajax({
             url: loadURL,
@@ -343,8 +342,8 @@ function playCurrent() {
             data: '{"uris": ["spotify:track:'+idCurrent+'"]}',
             method: "PUT"
         })
+        initialPlayback = true;
     }
-    initialPlayback = true;
 
 }
 
@@ -363,18 +362,15 @@ function printCurrent(snapList) {
 
     $.ajax({
         url: queryLyrics,
-        method: "GET"
-    }).then(function(response) {
-        var song = response.result.track;
-        console.log(song)
-        var lyrics = song.text
-        if (lyrics) {
-            // If lyrics are available, we paste the lyrics while also making sure line breaks exist in the string.
+        method: "GET",
+        success: function(response) {
+            var song = response.result.track;
+            var lyrics = song.text
             $('#lyrics').html('<h4 id="lyricsDisplay" class="uk-padding">'  +lyrics.replace(/\r\n|\r|\n/g, "</br>")+ '</h4>')
-        } else {
-            // If the lyrics are not available, we say so.
+        },
+        fail: function() {
             $('#lyrics').html('<h4 id="lyricsDisplay" class="uk-padding"> Sorry, no Lyrics available for this track. </h4>')
-        };
+        }
     });
 
     //Clear old playlist
