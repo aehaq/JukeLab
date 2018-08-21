@@ -368,7 +368,7 @@ function printCurrent(snapList) {
             var lyrics = song.text
             $('#lyrics').html('<h4 id="lyricsDisplay" class="uk-padding">'  +lyrics.replace(/\r\n|\r|\n/g, "</br>")+ '</h4>')
         },
-        fail: function() {
+        error: function() {
             $('#lyrics').html('<h4 id="lyricsDisplay" class="uk-padding"> Sorry, no Lyrics available for this track. </h4>')
         }
     });
