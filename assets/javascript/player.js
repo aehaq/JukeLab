@@ -14,12 +14,14 @@ var database = firebase.database();
 var isHost = false;
 var token;
 var roomName = localStorage.playlistName;
+var roomNameRef = database.ref().child(roomName);
 
 var roomNameRef = database.ref().child(roomName);
 
 var userID;
 var deviceId;
 var playlistID;
+var songArray = [];
 
 console.log(roomName);
 
@@ -32,7 +34,9 @@ if (window.location.href.includes("access_token")) {
     token = parseURL(window.location.href);
     console.log("parsed token: " + token);
     roomName = roomName;
-    userID = getUserInfo();  
+    userID = getUserID();
+    console.log(userID);
+    // makePlaylist();
     var newPlaylist = {
         name: roomName,
         token: token, 
@@ -46,7 +50,7 @@ if (window.location.href.includes("access_token")) {
         console.log("playlist info", snapshot.val());
         console.log("token:", snapshot.val().token);
         token = snapshot.val().token;
-        userID = getUserInfo();
+        userID = getUserID();
 })
 }
 
@@ -116,9 +120,8 @@ function parseURL(str) {
 }
 
 // function to get user id (not used currently)
-function getUserInfo () {
+function getUserID () {
     queryURL = "https://api.spotify.com/v1/me";
-    user = "124009025";
 
     $.ajax({
         url: queryURL,
@@ -137,6 +140,54 @@ function getUserInfo () {
     })
     return userID;
 }
+
+// append current tracks and updates on track change
+roomNameRef.on("value", function(snapshot) {
+    // console.log(snapshot.val());    
+    songArray = snapshot.val();
+    console.log(songArray);
+
+    // sets global var to current playlist
+    songArray = snapshot.val().list;
+    // console.log(songArray);
+
+    $(".songAppend").empty();
+
+    // if no songs in playlist
+    if (!snapshot.val().list) {
+        // var tempP = $("<p>").addClass("song-title uk-margin-remove").text(snapshot.val().list[i].title);
+        // var tempP2 = $("<p>").addClass("artist-name uk-margin-remove").text("By: " + snapshot.val().list[i].artist);
+        // tempDiv = $("<div>").addClass("song-info").append(tempP, tempP2);
+        tempDiv2 = $("<div>").addClass("uk-card-body trackItem").html('<img class="artist-icon" src=' + "https://partyspace.com/images/blog_entries/no-music.png" + ' alt="Image">');
+        tempDiv3 = $("<div uk-grid>").addClass("trackCard uk-card uk-card-small uk-card-default uk-grid-collapse uk-margin").append(tempDiv2);
+        $(".songAppend").append(tempDiv3);
+    }
+    else {
+        // for every item in firebase array, append song card
+        for (var i = 0; i < snapshot.val().list.length; i++) {
+            var tempP = $("<p>").addClass("song-title uk-margin-remove").text(snapshot.val().list[i].title);
+            var tempP2 = $("<p>").addClass("artist-name uk-margin-remove").text("By: " + snapshot.val().list[i].artist);
+            tempDiv = $("<div>").addClass("song-info").append(tempP, tempP2);
+            tempDiv2 = $("<div>").addClass("uk-card-body trackItem").html('<img class="artist-icon" src=' + snapshot.val().list[i].imgSmall + ' alt="Image">').prepend(tempDiv);
+            tempDiv3 = $("<div uk-grid>").addClass("trackCard uk-card uk-card-small uk-card-default uk-grid-collapse uk-margin").append(tempDiv2);
+            $(".songAppend").append(tempDiv3);
+        }
+    }
+})
+
+// TEST BUTTON TO ADD SONG, DELETE ON FINAL
+$("#test-button").on("click", function(){
+    songArray.push(
+        {
+            title : "Africa",
+            artist : "Toto",
+            id : "id",
+            imgLarge : "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/95/8e/f3/958ef37f-f942-288f-de15-ec914a25b2a3/074643772822.jpg/313x0w.jpg",
+            imgSmall : "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/95/8e/f3/958ef37f-f942-288f-de15-ec914a25b2a3/074643772822.jpg/313x0w.jpg"
+        }
+    );
+    roomNameRef.child("list").set(songArray);
+})
 
 //////////////////////////////////////////////////////////////
 
@@ -268,6 +319,7 @@ function printCurrent(snapList) {
         url: loadURL,
         headers: {
             'Authorization' : 'Bearer ' + token,
+
         },
         data: '{"uris": ["spotify:track:'+id+'"]}',
         method: "PUT"
@@ -340,3 +392,4 @@ roomNameRef.on("value", function(snapshot) {
     var snapList = snapshot.val().list
     printPlaylist(snapList)
 });
+
