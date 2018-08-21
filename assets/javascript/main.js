@@ -10,14 +10,24 @@ var config = {
 firebase.initializeApp(config);
 var database = firebase.database();
 
+// playlist icon locations
+var arrayIcons = ["ipod.png", 
+                  "mic.png", 
+                  "radio.png",
+                  "speaker.png",
+                  "speaker2.png",
+                  "vinyl-icon.png",
+                  "wave.png"
+                ];
+
+// Creates URL to authorize spotify account and get access token
 function authorizeSpotify() {
     var clientID = "b93cd2a896b04db6968176145cd8537f";
     var redirectURI = "https://aehaq.github.io/JukeLab/playlist_host.html";
     var scopeParameter = "&scope=playlist-read-collaborative playlist-modify-public playlist-read-private playlist-modify-private user-read-currently-playing user-modify-playback-state user-read-playback-state app-remote-control streaming user-read-recently-played user-read-birthdate user-read-email user-read-private";
     var queryURL = "https://accounts.spotify.com/authorize/?client_id=" + clientID + "&response_type=token&redirect_uri=" + redirectURI + scopeParameter;
     
-    console.log("current url: " + window.location.href);
-    // var teststr = "https://atton88.github.io/spotify-test/#access_token=BQAdcq499rKKgiIIMgbS4bercAR_HZWgsAIiqg1q4hb2DUHbKgqY_CKnfNvayC83gPsjiBDmE3rSVQQzBZ5tSW66eiP7yT9J2ca9UIqK2rsB_HP5DOqOfWohieiA6liFvfHfLkhZeOMs5g&token_type=Bearer&expires_in=3600";
+    // Go to spotify page to for authorization, redirects to playlist_host.html
     window.open(queryURL,"_self");
 }
 
@@ -25,7 +35,8 @@ function authorizeSpotify() {
 $("#spotifyLoginBtn").on("click", function(){
   console.log($("#newPlaylistName").val());
   var userId = $("#newPlaylistName").val();
-  // playlist cant be blank, replace with form validation
+
+  // playlist can't be blank
   if (!$("#newPlaylistName").val()) {
     alert("Enter Playlist Name"); 
     return;
@@ -51,27 +62,25 @@ $("#spotifyLoginBtn").on("click", function(){
 database.ref().on("child_added", function(roomObj) {
   var name = roomObj.val().name;
 
+  var rnd = Math.floor(Math.random() * 7);   // for random icon
+
+  // Create temp elements
   var tempDiv2 = $("<div>").attr("class", "uk-card uk-card-default uk-card-body uk-padding-small playlistRoom");
-  tempDiv2.html('<img class="roundPlaylistImg" src="temp-images/drake.jpg" alt="">' + "<p>" + name + "</p>")
-
+  tempDiv2.html('<img class="roundPlaylistImg" src="assets\\images\\music icons\\' + arrayIcons[rnd] + '" alt="">' + "<p>" + name + "</p>")
   $(tempDiv2).val(name);
-  // console.log("set val " + $(tempDiv2).val());
-  // console.log($(tempDiv2));
 
-  var tempDiv = $("<a>").attr("href", "playlist_guest.html");
-    tempDiv.html(
-      $("<div>").html(tempDiv2)
-    )
+  var tempDiv = $("<a>").attr("href", "playlist_guest.html").html($("<div>").html(tempDiv2));
 
-
-  $("#playlistGrid").append(tempDiv);
+  $("#playlistGrid").append(tempDiv); // append
 })
 
+// On click of playlist, store name into local storage to carry to redirect page
 $("#playlistGrid").on("click", ".playlistRoom", function(){
   console.log($(this).val());
   localStorage.playlistName = $(this).val();
 })
 
+// On click of logo, go to index.html
 $("#logo").on("click", function(){
   window.location.href = 'index.html';
 })
