@@ -11,34 +11,24 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.10/css/uikit.min.css" />
         <link rel="stylesheet" type="text/css" href="assets/css/style.css"/>
 
-        <!-- UIkit JS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.10/js/uikit.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.10/js/uikit-icons.min.js"></script>
-
-        <script src="https://www.gstatic.com/firebasejs/5.4.0/firebase.js"></script>
-        <script src="https://sdk.scdn.co/spotify-player.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="assets/javascript/player.js"></script>
-        <script src="assets/javascript/pause.js"></script>
-        <script src="assets/javascript/veto.js"></script>
-
-
+        
+        
     </head>
-
+    
     <body>
-
+        
         <div id="header" class="uk-padding-small">
             <div id="logo">
                 <img src="assets/images/logo.png" alt="">
             </div>
-
+            
             <div id="subheader" class="uk-margin-top" uk-margin>
                 <!--Add song button with id="addSongBtn"-->
                 <button id="addSongBtn" class="purpleRoundBtn uk-button" type="button" uk-toggle="target: #addSong"><i class="fas fa-plus fa-2x"></i></button>
-
+                
                 <!--Pause button with id="pauseSongBtn"-->
                 <button type="button" title="pause music" id="pauseSongBtn" class="purpleRoundBtn uk-button uk-margin-left"><i class="fas fa-pause fa-2x"></i></button>
-
+                
                 <!-- playlist name -->
                <h1 id="playlistName" class="uk-margin-remove uk-text-right">Crystal's House Party</h1>
             </div>
@@ -49,59 +39,70 @@
                     <button class="uk-modal-close-default" type="button" uk-close></button>
                     <h2 class="uk-modal-title">Add To Que</h2>
                     <div class="greenSeperator uk-margin-small-bottom"></div>
-                        <h2 class="uk-margin uk-margin-small-bottom">Search</h2>
+                    <h2 class="uk-margin uk-margin-small-bottom">Search</h2>
                         <div class="uk-margin-small">
                             <form>
                                 <input type="text" id="search-input" />
                                 <button id="search" type="submit">Submit</button>
                             </form>
                         </div>
-
+                        
                         <div id="search-results"></div>
 
                     </div>
-
+                    
                 </div>
             </div>
         </div>
-
-
+        
+        
         <!-- temp background image -->
-
+        
         <div class="uk-section uk-background-cover" style="background-image: url(assets/images/playlist_background.jpg)">
-
-
-
+            
+            
+            
             <!-- temp song list -->
-
-        <!-- TEST BUTTON TO ADD SONG DELETE ON FINAL -->
+            
+            <!-- TEST BUTTON TO ADD SONG DELETE ON FINAL -->
         <button id="test-button">TEST - DELETE</button>
-
-            <div id="upcoming" class="uk-container uk-margin songAppend">
-              <div class="trackCard uk-card uk-card-small uk-card-default uk-grid-collapse uk-margin" uk-grid>
-                  <div class="uk-card-body trackItem">
+        
+        <div id="upcoming" class="uk-container uk-margin songAppend">
+            <div class="trackCard uk-card uk-card-small uk-card-default uk-grid-collapse uk-margin" uk-grid>
+                <div class="uk-card-body trackItem">
                     
-                      <div class="song-info">
+                    <div class="song-info">
                         <p class="song-title uk-margin-remove">This is Song Name This is Song Name This is Song Name</p>
                         <p class="artist-name uk-margin-remove">by Drake</p>
-                      </div>
-                      <img class="artist-icon" src="assets/images/childish.jpg" alt="Image">
-                  </div>
-              </div>
-              <div class="trackCard uk-card uk-card-small uk-card-default uk-grid-collapse uk-margin" uk-grid>
+                    </div>
+                    <img class="artist-icon" src="assets/images/childish.jpg" alt="Image">
+                </div>
+            </div>
+            <div class="trackCard uk-card uk-card-small uk-card-default uk-grid-collapse uk-margin" uk-grid>
                   <div class="uk-card-body trackItem">
                       
                       <div class="song-info">
-                        <p class="song-title uk-margin-remove">This is Song Name This is Song Name This is Song Name</p>
-                        <p class="artist-name uk-margin-remove">by Drake</p>
-                      </div>
-                      <img class="artist-icon" src="assets/images/childish.jpg" alt="Image">
-                  </div>
-              </div>
+                          <p class="song-title uk-margin-remove">This is Song Name This is Song Name This is Song Name</p>
+                          <p class="artist-name uk-margin-remove">by Drake</p>
+                        </div>
+                        <img class="artist-icon" src="assets/images/childish.jpg" alt="Image">
+                    </div>
+                </div>
             </div>
         </div>
-
-
-
+        
+        
+        <!-- UIkit JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.10/js/uikit.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.10/js/uikit-icons.min.js"></script>
+    
+        <script src="https://www.gstatic.com/firebasejs/5.4.0/firebase.js"></script>
+        <script src="https://sdk.scdn.co/spotify-player.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="assets/javascript/player.js"></script>
+        <script src="assets/javascript/pause.js"></script>
+        <script src="assets/javascript/veto.js"></script>
+        
     </body>
-</html>
+    </html>
+    
