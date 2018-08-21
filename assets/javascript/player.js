@@ -81,7 +81,8 @@ player.addListener('player_state_changed', state => {
             console.log("preshift" + songArray)
             songArray.shift();
             roomNameRef.child("list").set(songArray);
-            console.log("postshift" + songArray)    
+            console.log("postshift" + songArray)
+            playCurrent();    
         }
     }
     if (state) {
@@ -108,13 +109,10 @@ $('#pauseSongBtn').on("click", function() {
     player.togglePlay();
 });
 
-$('#forward').on("click", function() {
-    player.previousTrack();
-});
-
-$('#back').on("click", function() {
+$('#skipSongBtn').on("click", function() {
     player.nextTrack();
 });
+
 };
 
 //////////////////////////////////////////////////////////////
