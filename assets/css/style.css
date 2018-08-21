@@ -181,3 +181,7 @@ body {
   [class*=uk-align] {
     margin-bottom: 13px;
   }
+
+  #logoImg:hover {
+    cursor: pointer;
+}

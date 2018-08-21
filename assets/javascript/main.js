@@ -71,3 +71,7 @@ $("#playlistGrid").on("click", ".playlistRoom", function(){
   console.log($(this).val());
   localStorage.playlistName = $(this).val();
 })
+
+$("#logo").on("click", function(){
+  window.location.href = 'index.html';
+})

@@ -397,3 +397,6 @@ roomNameRef.on("value", function(snapshot) {
     printCurrent(snapList)
 });
 
+$("#logo").on("click", function(){
+    window.location.href = 'index.html';
+  })
