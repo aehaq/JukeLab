@@ -39,7 +39,8 @@ if (window.location.href.includes("access_token")) {
     // makePlaylist();
     var newPlaylist = {
         name: roomName,
-        token: token,
+        token: token, 
+        timeStamp: new Date(0),
     }
     database.ref().child(roomName).set(newPlaylist);
     // database.ref().push(newPlaylist);
@@ -163,6 +164,7 @@ roomNameRef.on("value", function(snapshot) {
         // var tempP2 = $("<p>").addClass("artist-name uk-margin-remove").text("By: " + snapshot.val().list[i].artist);
         // tempDiv = $("<div>").addClass("song-info").append(tempP, tempP2);
         songArray=[];
+        initialPlayback = false;
         tempDiv2 = $("<div>").addClass("uk-card-body trackItem").html('<img class="artist-icon" src=' + "https://partyspace.com/images/blog_entries/no-music.png" + ' alt="Image">');
         tempDiv3 = $("<div uk-grid>").addClass("trackCard uk-card uk-card-small uk-card-default uk-grid-collapse uk-margin").append(tempDiv2);
         $(".songAppend").append(tempDiv3);
