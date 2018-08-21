@@ -16,13 +16,12 @@ var token;
 var roomName = localStorage.playlistName;
 var roomNameRef = database.ref().child(roomName);
 
-var roomNameRef = database.ref().child(roomName);
-
 var userID;
 var deviceId;
 var playlistID;
 var idCurrent;
 var songArray = [];
+var initialPlayback = false;
 
 console.log(roomName);
 
@@ -77,8 +76,16 @@ player.addListener('player_state_changed', state => {
     console.log(state); 
     // If the song finishes playing
     if (state.position === 0 && state.paused === true) {
-        songArray.shift();
-        roomNameRef.child("list").set(songArray);
+        console.log("preshift" + songArray)
+        if (idCurrent === state.track_window.current_track.id) {
+            console.log("preshift" + songArray)
+            songArray.shift();
+            roomNameRef.child("list").set(songArray);
+            console.log("postshift" + songArray)    
+        }
+    }
+    if (state) {
+        initialPlayback = true;
     }
 });
 
@@ -179,6 +186,7 @@ roomNameRef.on("value", function(snapshot) {
 })
 
 // TEST BUTTON TO ADD SONG, DELETE ON FINAL
+
 // $("#test-button").on("click", function(){
 //     songArray.push(
 //         {
@@ -192,6 +200,7 @@ roomNameRef.on("value", function(snapshot) {
 //     roomNameRef.child("list").set(songArray);
 //     playCurrent();
 // })
+
 
 //////////////////////////////////////////////////////////////
 
@@ -304,9 +313,9 @@ $(document).on('click', '.option', function() {
     );
     roomNameRef.child("list").set(songArray);
 
-    if ( !$('#pauseSongbtn').attr("currentSongId") ) {
+    //checks if initialPlayback is false
+    if (!initialPlayback) {
         playCurrent();
-        $('#pauseSongbtn').attr("currentSongId", idCurrent);
     }
 })
 
@@ -326,6 +335,7 @@ function playCurrent() {
             method: "PUT"
         })
     }
+    initialPlayback = true;
 
 }
 
