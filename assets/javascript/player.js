@@ -73,8 +73,8 @@ player.addListener('account_error', ({ message }) => { console.error(message); }
 player.addListener('playback_error', ({ message }) => { console.error(message); });
 
 // Playback status updates
-player.addListener('player_state_changed', state => { 
-    console.log(state); 
+player.addListener('player_state_changed', state => {
+    console.log(state);
     // If the song finishes playing
     if (state.position === 0 && state.paused === true) {
         console.log("preshift" + songArray)
@@ -83,7 +83,7 @@ player.addListener('player_state_changed', state => {
             songArray.shift();
             roomNameRef.child("list").set(songArray);
             console.log("postshift" + songArray)
-            playCurrent();    
+            playCurrent();
         }
     }
     if (state) {
@@ -150,7 +150,7 @@ function getUserID () {
 
 // append current tracks and updates on track change
 roomNameRef.on("value", function(snapshot) {
-    // console.log(snapshot.val());    
+    // console.log(snapshot.val());
 
 
 
@@ -212,12 +212,12 @@ $('#search').on("click", function() {
 
     $('#search-results').empty();
 
-    // Pulls search info    
+    // Pulls search info
     var searchQuery = $("#search-input").val();
-    
-    //Query URL for searching songs, note: Only takes one query, type needs to be selected    
+
+    //Query URL for searching songs, note: Only takes one query, type needs to be selected
     var searchUrl = "https://api.spotify.com/v1/search?q=" + searchQuery + "&type=track"
-    
+
     //Searches Spotify for song info
     $.ajax({
         url: searchUrl,
@@ -238,27 +238,36 @@ $('#search').on("click", function() {
             var imgLarge = song.album.images[0].url;
             var imgMed = song.album.images[1].url;
 
+            //Search Card HTML Example
+            // <a class="option trackCard uk-modal-close uk-card uk-card-small uk-card-default uk-grid-collapse uk-margin" uk-grid>
+            //   <div class="uk-card-body trackItem">
+            //       <div class="song-info">
+            //           <p class="song-title uk-margin-remove">This is Song Name This is Song Name This is Song Name</p>
+            //           <p class="artist-name uk-margin-remove">by Drake</p>
+            //       </div>
+            //       <img class="artist-icon" src="assets/images/childish.jpg" alt="Image">
+            //   </div>
+            // </a>
+
             //Prints card info
-            var resultCard = $('<button class="option uk-modal-close uk-card-hover uk-card uk-card-small uk-card-default uk-grid-collapse uk-margin-small uk-animation-toggle" uk-grid>'); 
+            var resultCard = $('<a class="option trackCard uk-modal-close uk-card uk-card-small uk-card-default uk-grid-collapse uk-margin" uk-grid>');
+            var cardBody = $('<div class="uk-card-body trackItem">');
+            var infoCard = $('<div class="song-info">');
+            var songTitle = $('<p class="song-title uk-margin-remove">').text(title);
+            var artistName = $('<p class="artist-name uk-margin-remove">').text("by " + artist);
+            var imageCard = $('<img class="artist-icon" src="" alt="Album Cover">').attr("src", imgMed);
 
-            var imageCard = $('<div class="avatar uk-card-media-right uk-flex-last uk-cover-container uk-width-1-4@s uk-animation-slide-top-small">');
+            infoCard.append(songTitle, artistName);
+            cardBody.append(infoCard, imageCard);
+            resultCard.append(cardBody);
 
-            var infoCard = $('<div class="uk-card-body uk-width-3-4@s uk-animation-slide-top-small">');
-            
-            infoCard.append('<h4 class="song-title uk-card-title">'+ title +'</h4><p class="artist-name">by '+artist+'</p>');
-            
-            imageCard.append('<canvas width="117" height="117"></canvas><img class="artist-icon" src="'+imgMed+'" alt="Image" uk-cover>');
-            
-            resultCard.append(infoCard);
-            resultCard.append(imageCard);
-            
             resultCard.addClass("option");
             resultCard.attr("title", title);
             resultCard.attr("artist", artist);
             resultCard.attr("song-id", id);
             resultCard.attr("lrg-img", imgLarge);
             resultCard.attr("med-img", imgMed);
-            
+
             $('#search-results').append(resultCard);
         }
 
@@ -379,7 +388,7 @@ function printCurrent(snapList) {
         var artist = item.artist;
         var img = item.imgLarge;
 
-        var trackContainer = $('<div class="trackCard uk-card uk-card-small uk-card-default uk-grid-collapse uk-margin" uk-grid>'); 
+        var trackContainer = $('<div class="trackCard uk-card uk-card-small uk-card-default uk-grid-collapse uk-margin" uk-grid>');
 
         var trackCard = $('<div class="uk-card-body trackItem">')
 
