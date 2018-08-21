@@ -172,7 +172,7 @@ roomNameRef.on("value", function(snapshot) {
     else {
         // sets global var to current playlist
         songArray = snapshot.val().list;
-        
+        $("#bg").css("background-image", "url(" + songArray[0].imgLarge + ")");
         // for every item in firebase array, append song card
         for (var i = 0; i < snapshot.val().list.length; i++) {
             var tempP = $("<p>").addClass("song-title uk-margin-remove").text(snapshot.val().list[i].title);
@@ -186,19 +186,21 @@ roomNameRef.on("value", function(snapshot) {
 })
 
 // TEST BUTTON TO ADD SONG, DELETE ON FINAL
-$("#test-button").on("click", function(){
-    songArray.push(
-        {
-            title : "Africa",
-            artist : "Toto",
-            id : "id",
-            imgLarge : "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/95/8e/f3/958ef37f-f942-288f-de15-ec914a25b2a3/074643772822.jpg/313x0w.jpg",
-            imgSmall : "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/95/8e/f3/958ef37f-f942-288f-de15-ec914a25b2a3/074643772822.jpg/313x0w.jpg"
-        }
-    );
-    roomNameRef.child("list").set(songArray);
 
-})
+// $("#test-button").on("click", function(){
+//     songArray.push(
+//         {
+//             title : "Africa",
+//             artist : "Toto",
+//             id : "id",
+//             imgLarge : "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/95/8e/f3/958ef37f-f942-288f-de15-ec914a25b2a3/074643772822.jpg/313x0w.jpg",
+//             imgSmall : "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/95/8e/f3/958ef37f-f942-288f-de15-ec914a25b2a3/074643772822.jpg/313x0w.jpg"
+//         }
+//     );
+//     roomNameRef.child("list").set(songArray);
+//     playCurrent();
+// })
+
 
 //////////////////////////////////////////////////////////////
 
