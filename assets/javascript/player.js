@@ -393,6 +393,6 @@ function printCurrent(snapList) {
 
 roomNameRef.on("value", function(snapshot) {
     var snapList = snapshot.val().list
-    printPlaylist(snapList)
+    printCurrent(snapList)
 });
 
