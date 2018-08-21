@@ -344,6 +344,9 @@ function printCurrent(snapList) {
     idCurrent = snapList[0].id;
 
     //display lyrics for playing song
+    var title = snapList[0].title;
+    var artist = snapList[0].artist;
+
     var orionApiKey = "B11C1C1z1RkD3pCAbR5LpaftjkpaST0q2JICuY7SYx7jzSvYZ2IadJv0I98lLrAU"
     var queryLyrics = "https://orion.apiseeds.com/api/music/lyric/" + artist +"/" + title + "?apikey=" + orionApiKey
 
