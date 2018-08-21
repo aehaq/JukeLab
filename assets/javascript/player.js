@@ -75,7 +75,7 @@ player.addListener('playback_error', ({ message }) => { console.error(message); 
 player.addListener('player_state_changed', state => { 
     console.log(state); 
     // If the song finishes playing
-    if (state.position === 0 && paused === true) {
+    if (state.position === 0 && state.paused === true) {
         songArray.shift();
         roomNameRef.child("list").set(songArray);
     }
