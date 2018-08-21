@@ -108,6 +108,13 @@ player.connect();
 
 $('#pauseSongBtn').on("click", function() {
     player.togglePlay();
+
+    if (!initialPlayback) {
+        playCurrent();
+    }
+    if (initialPlayback) {
+        $(this).find('i').toggleClass('fa-pause');
+    }
 });
 
 $('#skipSongBtn').on("click", function() {
