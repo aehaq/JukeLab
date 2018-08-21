@@ -1,30 +1,51 @@
+
+
+var songArray;
 var thisDevice;
-var apiKey = 'BQBDUJrkwUhyisamMWWboOjM9zxXQTTZu4CrI1P-iK2H8z-1OHVY_yCupCQzHXvnBPk-8hGmNxAwiOEOKpcn-6jOjwXimRl2UtWsyZOrRJPYpWnnLmRqHSyb7gsXQGMQlA6PTmHhqvj3QEbeTs1pmreGQ7OV-LqiNpt5GCrJ7leA20iePiF2TsFNI-wwKFlMUm9u8EBJ6Y9wfkK1F-yzuse97uAzuS9NiON_6kCjMToYwS4-5tT18DKHLmwarSH-fUwi3CkZWuqh';
+var apiKey = 'BQAUaWx0E8CRY9WkHvGfPCcuw8_BoyGYA9QabF9W489AAJdKWMFEmHJge4Il6ZlsOVOR1lRaXi0r9A71h5aWaE08D1_nWNICyW3ZjWxOZBULlK_onMh5lxVSGCd2oDQ0KPw0OPS2P-rRsWHnu7du6az-f1f2y0cYfOv2ILrWfbOqqGqhiXGNQl4T1v33U_4iCqBFq9LvzRbhZqFAC9Eg0toHy3uhaH_G2Db--4AlgAhVsEu5bWnoGql_b73Jgvc6RzogXdY7D0uI';
 var userID;
 var myId = 'y0boqvzwlmvycue8917uz1ylg';
-var playlist;
+// var playlistID;
 
 // This function should create a spotify playlist (Currently returns error)
-function makePlaylist () {
-    $.post({
-        data: '{"name": "jukeLab", "public": false}',
+// function makePlaylist () {
+//     $.post({
+//         data: '{"name": "jukeLab", "public": true}',
+//         headers: {
+//             'Authorization' : 'Bearer ' + apiKey,
+//             'Content-Type' : "application/json"
+//         },
+//         url: 'https://api.spotify.com/v1/users/'+ myId +'/playlists',
+//         success: function(newPlaylist) {
+//             console.log(newPlaylist);
+//             playlistObject = newPlaylist;
+//             playlistID = newPlaylist.id;
+//             console.log(playlistID);
+//             loadPlaylist();
+//             return playlistID;
+//         },
+//         error: function(errorObject) {
+//             console.log("Ajax Post failed")
+//             console.log(errorObject)
+//         }
+//     })
+// }
+
+//loading playlist
+function loadPlaylist() {
+    var loadURL = 'https://api.spotify.com/v1/me/player/play?device_id=' + thisDevice;
+
+    $.ajax({
+        url: loadURL,
         headers: {
             'Authorization' : 'Bearer ' + apiKey,
-            'Content-Type' : "application/json"
         },
-        url: 'https://api.spotify.com/v1/users/'+ myId +'/playlists',
-        success: function(newPlaylist) {
-            console.log(newPlaylist);
-            var playlistID = newPlaylist.id;
-            console.log(playlistID)
-            return playlistID;
-        },
-        error: function(errorObject) {
-            console.log("Ajax Post failed")
-            console.log(errorObject)
-        }
+        data: '{"context_uris": ["spotify:playlist:'+playlistID+'"]}',
+        method: "PUT"
     })
+
 }
+
 
 // This function returns the user's Id
 function getUserInfo () {
@@ -60,12 +81,21 @@ window.onSpotifyWebPlaybackSDKReady = () => {
     player.addListener('playback_error', ({ message }) => { console.error(message); });
 
     // Playback status updates
-    player.addListener('player_state_changed', state => { console.log(state); });
+    player.addListener('player_state_changed', state => { 
+        console.log(state);
+    
+    
+    
+    
+    
+    
+    });
 
     // Ready (also returns the id for the device to a master variable)
     player.addListener('ready', ({ device_id }) => {
         console.log('Ready with Device ID', device_id);
         thisDevice = device_id;
+        // makePlaylist();
         return thisDevice;
     });
 
@@ -89,8 +119,6 @@ window.onSpotifyWebPlaybackSDKReady = () => {
     $('#back').on("click", function() {
         player.nextTrack();
     });
-
-    makePlaylist();
 
 };
 
@@ -160,20 +188,25 @@ $('#search').on("click", function() {
 
 // spotify:user:y0boqvzwlmvycue8917uz1ylg:playlist:0AH0ZjJeUpU7taDXPxjJJN
 
-//Add song to playlist on click.
+//Add song to playlist on click. (working!)
 $(document).on('click', '.option', function() {
     event.preventDefault();
 
+    var trackID = $(this).attr("song-id")
+
+    var loadURL = 'https://api.spotify.com/v1/me/player/play?device_id=' + thisDevice
+
+    // addTrack(trackID);
+
+    // loadPlaylist();
+
     $.ajax({
-        url: 'https://api.spotify.com/v1/playlists/0AH0ZjJeUpU7taDXPxjJJN/tracks',
-        type: "POST",
-        data: '{"uris": ["spotify:track:'+trackId+'"]}',
+        url: loadURL,
         headers: {
             'Authorization' : 'Bearer ' + apiKey,
         },
-        error: function() {
-            console.log("Playlist add failed")
-        }
+        data: '{"uris": ["spotify:track:'+trackID+'"]}',
+        method: "PUT"
     })
 
 })
@@ -182,7 +215,6 @@ $(document).on('click', '.option', function() {
 
 
 
-//loading playlist
 
     // 
     // var playURL = 'https://api.spotify.com/v1/me/player/play?device_id=' + thisDevice
@@ -192,25 +224,27 @@ $(document).on('click', '.option', function() {
     //     headers: {
     //         'Authorization' : 'Bearer ' + apiKey,
     //     },
-    //     data: '{"uris": ["spotify:playlist:'+playlistId+'"]}',
+    //     data: '{"uris": ["spotify:playlist:'+playlistID+'"]}',
     //     method: "PUT"
     // })
 
 //Add song to playlist
-$.ajax({
+function addTrack(songID) {
+
+    $.ajax({
         type: "POST",
-        data: {
-            "uris": ["spotify:track:'+trackId+'"]         
-        },
+        data: '{"uris": ["spotify:track:'+songID+'"]}', 
         headers: {
             'Authorization' : 'Bearer ' + apiKey,
             'Content-Type' : "application/json"
         },
-        url: 'https://api.spotify.com/v1/users/'+ myId +'/playlists/tracks',
-        success: function(newPlaylist) {
-            console.log(newPlaylist);
+        url: 'https://api.spotify.com/v1/playlists/'+playlistID+'/tracks',
+        success: function() {
+            console.log('Track added to playlist');
         },
         error: function() {
             console.log("Ajax Post failed")
         }
     })
+
+}
