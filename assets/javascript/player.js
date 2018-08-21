@@ -52,7 +52,7 @@ if (window.location.href.includes("access_token")) {
         console.log("token:", snapshot.val().token);
         token = snapshot.val().token;
         userID = getUserID();
-})
+    })
 }
 
 // check localstorage for name
@@ -111,8 +111,7 @@ $('#pauseSongBtn').on("click", function() {
 
     if (!initialPlayback) {
         playCurrent();
-    }
-    if (initialPlayback) {
+    } else {
         $(this).find('i').toggleClass('fa-pause');
     }
 });
