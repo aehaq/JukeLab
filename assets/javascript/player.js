@@ -156,6 +156,7 @@ roomNameRef.on("value", function(snapshot) {
         // var tempP = $("<p>").addClass("song-title uk-margin-remove").text(snapshot.val().list[i].title);
         // var tempP2 = $("<p>").addClass("artist-name uk-margin-remove").text("By: " + snapshot.val().list[i].artist);
         // tempDiv = $("<div>").addClass("song-info").append(tempP, tempP2);
+        songArray=[];
         tempDiv2 = $("<div>").addClass("uk-card-body trackItem").html('<img class="artist-icon" src=' + "https://partyspace.com/images/blog_entries/no-music.png" + ' alt="Image">');
         tempDiv3 = $("<div uk-grid>").addClass("trackCard uk-card uk-card-small uk-card-default uk-grid-collapse uk-margin").append(tempDiv2);
         $(".songAppend").append(tempDiv3);
