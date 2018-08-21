@@ -33,7 +33,7 @@ body {
   }
 
   #logo img {
-    max-width: 120px;
+    max-width: 160px;
   }
 
   #playlistName {
@@ -120,7 +120,7 @@ body {
 
 
   .uk-background-cover {
-    height: 1700px;
+    min-height: calc(100vh - 180px);
   }
 
   .uk-cover {
@@ -138,7 +138,7 @@ body {
   .purpleRoundBtn {
     min-height: 75px;
     min-width: 75px;
-    margin-top: 65px;
+    margin-top: 82px;
     border-radius: 100px;
     color: #fff;
     border: 0px solid #fff;
