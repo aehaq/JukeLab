@@ -201,7 +201,7 @@ $('#search').on("click", function() {
 
 function makePlaylist (userID) {
     $.post({
-        data: '{"name": "'+roomName+'", "public": false}',
+        data: '{"name": "jukeLab", "public": false}',
         headers: {
             'Authorization' : 'Bearer ' + token,
             'Content-Type' : "application/json"
