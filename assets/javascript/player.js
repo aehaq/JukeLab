@@ -21,6 +21,7 @@ var roomNameRef = database.ref().child(roomName);
 var userID;
 var deviceId;
 var playlistID;
+var idCurrent;
 var songArray = [];
 
 console.log(roomName);
@@ -108,8 +109,8 @@ $('#back').on("click", function() {
     player.nextTrack();
 });
 };
-//////////////////////////////////////////////////////////////
 
+//////////////////////////////////////////////////////////////
 //parse url, returns token
 function parseURL(str) {
     console.log(str);
@@ -189,6 +190,7 @@ $("#test-button").on("click", function(){
         }
     );
     roomNameRef.child("list").set(songArray);
+    playCurrent();
 })
 
 //////////////////////////////////////////////////////////////
@@ -302,20 +304,16 @@ $(document).on('click', '.option', function() {
     );
     roomNameRef.child("list").set(songArray);
 
+    if ( !$('#pauseSongbtn').attr("currentSongId") ) {
+        playCurrent();
+        $('#pauseSongbtn').attr("currentSongId", idCurrent);
+    }
 })
 
 
-// Add songs to list from array
+//begin playing first song
+function playCurrent() {
 
-function printCurrent(snapList) {
-
-    //grab variables for first song
-    var title = snapList[0].title;
-    var artist = snapList[0].artist;
-    var id = snapList[0].id;
-    var img = snapList[0].imgLarge;
-
-    //begin playing first song
     if (isHost) {
 
         var loadURL = 'https://api.spotify.com/v1/me/player/play?device_id=' + deviceId
@@ -323,12 +321,19 @@ function printCurrent(snapList) {
             url: loadURL,
             headers: {
                 'Authorization' : 'Bearer ' + token,
-    
             },
-            data: '{"uris": ["spotify:track:'+id+'"]}',
+            data: '{"uris": ["spotify:track:'+idCurrent+'"]}',
             method: "PUT"
         })
     }
+
+}
+
+// Add songs to list from array
+function printCurrent(snapList) {
+
+    //grab id for first song and set to global variable so that it knows which song to play.
+    idCurrent = snapList[0].id;
 
     //display lyrics for playing song
     var orionApiKey = "B11C1C1z1RkD3pCAbR5LpaftjkpaST0q2JICuY7SYx7jzSvYZ2IadJv0I98lLrAU"
@@ -342,8 +347,10 @@ function printCurrent(snapList) {
         console.log(song)
         var lyrics = song.text
         if (lyrics) {
+            // If lyrics are available, we paste the lyrics while also making sure line breaks exist in the string.
             $('#lyrics').html('<h4 id="lyricsDisplay" class="uk-padding">'  +lyrics.replace(/\r\n|\r|\n/g, "</br>")+ '</h4>')
         } else {
+            // If the lyrics are not available, we say so.
             $('#lyrics').html('<h4 id="lyricsDisplay" class="uk-padding"> Sorry, no Lyrics available for this track. </h4>')
         };
     });
@@ -351,24 +358,8 @@ function printCurrent(snapList) {
     //Clear old playlist
     $('#upcoming').empty();
 
-    //display currently playing song
-    var trackContainer = $('<div class="trackCard uk-card uk-card-small uk-card-default uk-grid-collapse uk-margin" uk-grid>'); 
-
-    var trackCard = $('<div class="uk-card-body trackItem">')
-
-    var infoCard = $(' <div class="song-info">');
-    
-    infoCard.append(' <p class="song-title uk-margin-remove">'+title+'</p><p class="artist-name uk-margin-remove">by '+artist+'</p>');
-    var previewImg = $(' <img class="artist-icon" src="'+img+'" alt="Image">')
-
-    trackCard.append(infoCard);
-    trackCard.append(previewImg)
-    trackContainer.append(trackCard);
-    $('#upcoming').append(trackContainer)
-
-
     //display info for queued songs
-    for (let i = 1; i < snapList.length; i++) {
+    for (let i = 0; i < snapList.length; i++) {
         let item = snapList[i];
 
         var title = item.title;
