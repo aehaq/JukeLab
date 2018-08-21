@@ -33,6 +33,7 @@ function authorizeSpotify() {
 
 // authorize spotify and save playlist name to firebase
 $("#spotifyLoginBtn").on("click", function(){
+  event.preventDefault();
   console.log($("#newPlaylistName").val());
   var userId = $("#newPlaylistName").val();
 
