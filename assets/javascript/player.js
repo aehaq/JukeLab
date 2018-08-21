@@ -77,7 +77,7 @@ player.addListener('player_state_changed', state => {
     // If the song finishes playing
     if (state.position === 0 && paused === true) {
         songArray.shift();
-        roomNameRef.set(songArray);
+        roomNameRef.child("list").set(songArray);
     }
 });
 
@@ -299,7 +299,7 @@ $(document).on('click', '.option', function() {
             imgSmall : imgMed
         }
     );
-    roomNameRef.set(songArray);
+    roomNameRef.child("list").set(songArray);
 
 })
 
@@ -315,16 +315,19 @@ function printCurrent(snapList) {
     var img = snapList[0].imgLarge;
 
     //begin playing first song
-    var loadURL = 'https://api.spotify.com/v1/me/player/play?device_id=' + deviceId
-    $.ajax({
-        url: loadURL,
-        headers: {
-            'Authorization' : 'Bearer ' + token,
+    if (isHost) {
 
-        },
-        data: '{"uris": ["spotify:track:'+id+'"]}',
-        method: "PUT"
-    })
+        var loadURL = 'https://api.spotify.com/v1/me/player/play?device_id=' + deviceId
+        $.ajax({
+            url: loadURL,
+            headers: {
+                'Authorization' : 'Bearer ' + token,
+    
+            },
+            data: '{"uris": ["spotify:track:'+id+'"]}',
+            method: "PUT"
+        })
+    }
 
     //display lyrics for playing song
     var orionApiKey = "B11C1C1z1RkD3pCAbR5LpaftjkpaST0q2JICuY7SYx7jzSvYZ2IadJv0I98lLrAU"
@@ -389,7 +392,6 @@ function printCurrent(snapList) {
 }
 
 roomNameRef.on("value", function(snapshot) {
-    console.log(snapshot.val().list[i].title)
     var snapList = snapshot.val().list
     printPlaylist(snapList)
 });
