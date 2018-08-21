@@ -144,11 +144,9 @@ function getUserID () {
 // append current tracks and updates on track change
 roomNameRef.on("value", function(snapshot) {
     // console.log(snapshot.val());    
-    songArray = snapshot.val();
-    console.log(songArray);
 
-    // sets global var to current playlist
-    songArray = snapshot.val().list;
+
+
     // console.log(songArray);
 
     $(".songAppend").empty();
@@ -163,6 +161,9 @@ roomNameRef.on("value", function(snapshot) {
         $(".songAppend").append(tempDiv3);
     }
     else {
+        // sets global var to current playlist
+        songArray = snapshot.val().list;
+        
         // for every item in firebase array, append song card
         for (var i = 0; i < snapshot.val().list.length; i++) {
             var tempP = $("<p>").addClass("song-title uk-margin-remove").text(snapshot.val().list[i].title);
