@@ -16,6 +16,8 @@ var token;
 var roomName = localStorage.playlistName;
 var roomNameRef = database.ref().child(roomName);
 
+var roomNameRef = database.ref().child(roomName);
+
 var userID;
 var deviceId;
 var playlistID;
@@ -34,7 +36,7 @@ if (window.location.href.includes("access_token")) {
     roomName = roomName;
     userID = getUserID();
     console.log(userID);
-    makePlaylist();
+    // makePlaylist();
     var newPlaylist = {
         name: roomName,
         token: token, 
@@ -70,7 +72,14 @@ player.addListener('account_error', ({ message }) => { console.error(message); }
 player.addListener('playback_error', ({ message }) => { console.error(message); });
 
 // Playback status updates
-player.addListener('player_state_changed', state => { console.log(state); });
+player.addListener('player_state_changed', state => { 
+    console.log(state); 
+    // If the song finishes playing
+    if (state.position === 0 && paused === true) {
+        songArray.shift();
+        roomNameRef.set(songArray);
+    }
+});
 
 // Ready
 player.addListener('ready', ({ device_id }) => {
@@ -87,7 +96,7 @@ console.log('Device ID has gone offline', device_id);
 // Connect to the player!
 player.connect();
 
-$('#toggleplay').on("click", function() {
+$('#pauseSongBtn').on("click", function() {
     player.togglePlay();
 });
 
@@ -125,6 +134,9 @@ function getUserID () {
         var userID = response.id;  //get user ID
         console.log(response);
         console.log(userID);
+        // if (isHost) {
+        //     makePlaylist(userID);
+        // }
     })
     return userID;
 }
@@ -132,11 +144,8 @@ function getUserID () {
 // append current tracks and updates on track change
 roomNameRef.on("value", function(snapshot) {
     // console.log(snapshot.val());    
-    songArray = snapshot.val();
-    console.log(songArray);
 
-    // sets global var to current playlist
-    songArray = snapshot.val().list;
+
     // console.log(songArray);
 
     $(".songAppend").empty();
@@ -151,6 +160,9 @@ roomNameRef.on("value", function(snapshot) {
         $(".songAppend").append(tempDiv3);
     }
     else {
+        // sets global var to current playlist
+        songArray = snapshot.val().list;
+
         // for every item in firebase array, append song card
         for (var i = 0; i < snapshot.val().list.length; i++) {
             var tempP = $("<p>").addClass("song-title uk-margin-remove").text(snapshot.val().list[i].title);
@@ -179,13 +191,6 @@ $("#test-button").on("click", function(){
 
 //////////////////////////////////////////////////////////////
 
-$(function(){
-    console.log("test js page");
-
-})
-
-
-
 // When the search button is clicked.
 $('#search').on("click", function() {
     event.preventDefault();
@@ -200,6 +205,7 @@ $('#search').on("click", function() {
     //Query URL for searching songs, note: Only takes one query, type needs to be selected    
     var searchUrl = "https://api.spotify.com/v1/search?q=" + searchQuery + "&type=track"
     
+    //Searches Spotify for song info
     $.ajax({
         url: searchUrl,
         headers: {
@@ -210,7 +216,8 @@ $('#search').on("click", function() {
         console.log(response);
         var results = response.tracks.items;
 
-        for (let i = 0; i < 5; i++) {
+        // Grabs info regarding the first few results
+        for (let i = 0; i < 10; i++) {
             var song = results[i];
             var artist = song.artists[0].name;
             var title = song.name;
@@ -218,7 +225,8 @@ $('#search').on("click", function() {
             var imgLarge = song.album.images[0].url;
             var imgMed = song.album.images[1].url;
 
-            var resultCard = $('<div class="uk-card-hover uk-card uk-card-small uk-card-default uk-grid-collapse uk-margin-small uk-animation-toggle" uk-grid>'); 
+            //Prints card info
+            var resultCard = $('<button class="option uk-modal-close uk-card-hover uk-card uk-card-small uk-card-default uk-grid-collapse uk-margin-small uk-animation-toggle" uk-grid>'); 
 
             var imageCard = $('<div class="avatar uk-card-media-right uk-flex-last uk-cover-container uk-width-1-4@s uk-animation-slide-top-small">');
 
@@ -247,25 +255,140 @@ $('#search').on("click", function() {
 
 //////////////////////
 
-function makePlaylist () {
-    $.post({
-        data: '{"name": "jukeLab", "public": false}',
+// // Make Spotify Playlist (No longer using)
+// function makePlaylist (userID) {
+//     $.post({
+//         data: '{"name": "jukeLab", "public": false}',
+//         headers: {
+//             'Authorization' : 'Bearer ' + token,
+//             'Content-Type' : "application/json"
+//         },
+//         url: 'https://api.spotify.com/v1/users/'+ userID +'/playlists',
+//         success: function(newPlaylist) {
+//             console.log(newPlaylist);
+//             playlistID = newPlaylist.id;
+//             console.log(playlistID)
+//         },
+//         error: function(errorObject) {
+//             console.log("Ajax Post failed")
+//             console.log(errorObject)
+//         }
+//     })
+// }
+
+//////////////////////////
+
+//Add songs to firebase when selected from search
+
+$(document).on('click', '.option', function() {
+    event.preventDefault();
+
+    var title = $(this).attr("title");
+    var artist = $(this).attr("artist");
+    var id = $(this).attr("song-id");
+    var imgLarge = $(this).attr("lrg-img");
+    var imgMed = $(this).attr("med-img");
+
+    songArray.push(
+        {
+            title : title,
+            artist : artist,
+            id : id,
+            imgLarge : imgLarge,
+            imgSmall : imgMed
+        }
+    );
+    roomNameRef.set(songArray);
+
+})
+
+
+// Add songs to list from array
+
+function printCurrent(snapList) {
+
+    //grab variables for first song
+    var title = snapList[0].title;
+    var artist = snapList[0].artist;
+    var id = snapList[0].id;
+    var img = snapList[0].imgLarge;
+
+    //begin playing first song
+    var loadURL = 'https://api.spotify.com/v1/me/player/play?device_id=' + deviceId
+    $.ajax({
+        url: loadURL,
         headers: {
             'Authorization' : 'Bearer ' + token,
-            'Content-Type' : "application/json"
+
         },
-        url: 'https://api.spotify.com/v1/users/'+ userID +'/playlists',
-        success: function(newPlaylist) {
-            console.log(newPlaylist);
-            var playlistID = newPlaylist.id;
-            console.log(playlistID)
-            return playlistID;
-        },
-        error: function(errorObject) {
-            console.log("Ajax Post failed")
-            console.log(errorObject)
-        }
+        data: '{"uris": ["spotify:track:'+id+'"]}',
+        method: "PUT"
     })
+
+    //display lyrics for playing song
+    var orionApiKey = "B11C1C1z1RkD3pCAbR5LpaftjkpaST0q2JICuY7SYx7jzSvYZ2IadJv0I98lLrAU"
+    var queryLyrics = "https://orion.apiseeds.com/api/music/lyric/" + artist +"/" + title + "?apikey=" + orionApiKey
+
+    $.ajax({
+        url: queryLyrics,
+        method: "GET"
+    }).then(function(response) {
+        var song = response.result.track;
+        console.log(song)
+        var lyrics = song.text
+        if (lyrics) {
+            $('#lyrics').html('<h4 id="lyricsDisplay" class="uk-padding">'  +lyrics.replace(/\r\n|\r|\n/g, "</br>")+ '</h4>')
+        } else {
+            $('#lyrics').html('<h4 id="lyricsDisplay" class="uk-padding"> Sorry, no Lyrics available for this track. </h4>')
+        };
+    });
+
+    //Clear old playlist
+    $('#upcoming').empty();
+
+    //display currently playing song
+    var trackContainer = $('<div class="trackCard uk-card uk-card-small uk-card-default uk-grid-collapse uk-margin" uk-grid>'); 
+
+    var trackCard = $('<div class="uk-card-body trackItem">')
+
+    var infoCard = $(' <div class="song-info">');
+    
+    infoCard.append(' <p class="song-title uk-margin-remove">'+title+'</p><p class="artist-name uk-margin-remove">by '+artist+'</p>');
+    var previewImg = $(' <img class="artist-icon" src="'+img+'" alt="Image">')
+
+    trackCard.append(infoCard);
+    trackCard.append(previewImg)
+    trackContainer.append(trackCard);
+    $('#upcoming').append(trackContainer)
+
+
+    //display info for queued songs
+    for (let i = 1; i < snapList.length; i++) {
+        let item = snapList[i];
+
+        var title = item.title;
+        var artist = item.artist;
+        var img = item.imgLarge;
+
+        var trackContainer = $('<div class="trackCard uk-card uk-card-small uk-card-default uk-grid-collapse uk-margin" uk-grid>'); 
+
+        var trackCard = $('<div class="uk-card-body trackItem">')
+
+        var infoCard = $(' <div class="song-info">');
+
+        infoCard.append(' <p class="song-title uk-margin-remove">'+title+'</p><p class="artist-name uk-margin-remove">by '+artist+'</p>');
+        var previewImg = $(' <img class="artist-icon" src="'+img+'" alt="Image">')
+
+        trackCard.append(infoCard);
+        trackCard.append(previewImg)
+        trackContainer.append(trackCard);
+        $('#upcoming').append(trackContainer)
+    }
+
 }
 
-
+roomNameRef.on("value", function(snapshot) {
+    console.log(snapshot.val().list[i].title)
+    var snapList = snapshot.val().list
+    printPlaylist(snapList)
+});
