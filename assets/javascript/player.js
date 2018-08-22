@@ -62,7 +62,7 @@ console.log("get item: " + roomName);
 // Initialize Spotify SDK and parse token from url
 window.onSpotifyWebPlaybackSDKReady = () => {
     const player = new Spotify.Player({
-    name: 'Test Player',
+    name: 'JukeLab',
     getOAuthToken: cb => { cb(token); }
     });
 
